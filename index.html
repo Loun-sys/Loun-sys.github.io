@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Чарлист — Тьма</title>
+<title>Чарлист — Адольф Грау</title>
 <style>
 body{
   margin:0;
@@ -13,7 +13,7 @@ body{
 .wrap{max-width:1200px;margin:auto;padding:20px;}
 h1{text-align:center;letter-spacing:4px;text-transform:uppercase;}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;}
-.card{border:1px solid #333;border-radius:14px;padding:14px;background:#050505;box-shadow:0 0 20px rgba(255,255,255,.05);}
+.card{border:1px solid #333;border-radius:14px;padding:14px;background:#050505;box-shadow:0 0 20px rgba(255,255,255,.05);position:relative;}
 .label{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#888;margin-bottom:6px;}
 input,textarea{width:100%;background:#0b0b0b;border:1px solid #333;color:#eee;border-radius:8px;padding:8px;margin:4px 0;}
 button{background:#111;border:1px solid #444;color:#ccc;padding:8px;border-radius:8px;cursor:pointer;}
@@ -29,11 +29,18 @@ button:hover{border-color:#aaa;color:#fff;}
 #portraitBox{border:1px solid #333;border-radius:12px;height:260px;display:flex;align-items:center;justify-content:center;color:#444;cursor:pointer;overflow:hidden;margin-bottom:10px;}
 #portraitBox:hover{border-color:#777;color:#777;}
 #portraitBox img{width:100%;height:100%;object-fit:cover;}
+
+/* Новые стили для скрытых форм */
+.addBtn{position:absolute;top:10px;right:10px;width:24px;height:24px;border-radius:50%;border:none;font-size:18px;font-weight:bold;line-height:18px;text-align:center;cursor:pointer;color:#ccc;background:#111;}
+.addBtn:hover{color:#fff;}
+.addForm{display:none;margin-top:6px;}
+.addForm input, .addForm textarea{font-size:12px;padding:6px;}
+.addForm button{padding:4px 8px;font-size:12px;margin-top:4px;}
 </style>
 </head>
 <body>
 <div class="wrap">
-<h1>Чарлист — Тьма</h1>
+<h1>Чарлист — Адольф Грау</h1>
 
 <div class="grid">
 <div class="card">
@@ -48,11 +55,14 @@ button:hover{border-color:#aaa;color:#fff;}
 <div id="stats"></div>
 </div>
 
-<div class="card">
+<div class="card" id="talCard">
 <div class="label">Таланты</div>
+<button class="addBtn" onclick="toggleForm('talForm')">+</button>
+<div class="addForm" id="talForm">
 <input id="talName" placeholder="Название">
 <textarea id="talDesc" placeholder="Описание"></textarea>
 <button onclick="addTalent()">Добавить</button>
+</div>
 <div id="talents"></div>
 </div>
 </div>
@@ -65,8 +75,13 @@ button:hover{border-color:#aaa;color:#fff;}
 </div>
 
 <div class="grid">
-<div class="card"><div class="label">Инвентарь</div><div id="invAdd"></div><div id="inventory"></div></div>
-<div class="card"><div class="label">Склад</div><div id="stashAdd"></div><div id="stash"></div></div>
+<div class="card" id="invCard"><div class="label">Инвентарь</div><button class="addBtn" onclick="toggleForm('invForm')">+</button>
+<div class="addForm" id="invForm"></div>
+<div id="inventory"></div></div>
+
+<div class="card" id="stashCard"><div class="label">Склад</div><button class="addBtn" onclick="toggleForm('stashForm')">+</button>
+<div class="addForm" id="stashForm"></div>
+<div id="stash"></div></div>
 </div>
 
 </div>
@@ -74,9 +89,9 @@ button:hover{border-color:#aaa;color:#fff;}
 <script>
 const STORE_KEY="dark_sheet_final";
 
-// Начальные значения персонажа
+// Начальные значения
 let STATE = {
-  name: "Грей",
+  name: "Адольф Грау",
   portrait: "",
   stats: {
     stat_body: 4,
@@ -110,11 +125,10 @@ let STATE = {
   ]
 };
 
-// Загрузка из localStorage
 function save(){localStorage.setItem(STORE_KEY,JSON.stringify(STATE))}
 function load(){const s=localStorage.getItem(STORE_KEY);if(s) STATE=JSON.parse(s)}
 
-// Создание кликабельных точек
+// Точки характеристик и навыков
 function dotRow(container,key,max,stored={}){
   let val=stored[key]||0;
   const wrap=document.createElement("div");wrap.className="dots";
@@ -124,17 +138,12 @@ function dotRow(container,key,max,stored={}){
     [...wrap.children].forEach((d,i)=>d.classList.toggle("active",i<val));
     stored[key]=val; save();
   }
-  for(let i=1;i<=max;i++){
-    const d=document.createElement("div");d.className="dot";
-    d.onclick=()=>{val=(val===i)?i-1:i; redraw();}
-    wrap.appendChild(d);
-  }
+  for(let i=1;i<=max;i++){const d=document.createElement("div");d.className="dot";d.onclick=()=>{val=(val===i)?i-1:i; redraw();};wrap.appendChild(d);}
   container.appendChild(wrap);
   container.appendChild(counter);
   redraw();
 }
 
-// Статблоки характеристик
 function statBlock(name,max,key){
   const c=document.createElement("div");
   const l=document.createElement("div");l.className="label";l.textContent=name;
@@ -143,11 +152,9 @@ function statBlock(name,max,key){
   return c;
 }
 
-// Характеристики
 const statsDiv=document.getElementById("stats");
 [["Телосложение",4,"stat_body"],["Смекалка",5,"stat_mind"],["Ловкость",2,"stat_agl"],["Эмпатия",3,"stat_emp"]].forEach(s=>statsDiv.appendChild(statBlock(s[0],s[1],s[2])));
 
-// Навыки
 function skillSet(id,names,keyPrefix){
   const root=document.getElementById(id);
   names.forEach(n=>{
@@ -172,9 +179,7 @@ const imgInput=document.getElementById("imgInput");
 imgInput.onchange=e=>{
   const f=e.target.files[0];
   const r=new FileReader();
-  r.onload=()=>{
-    STATE.portrait=r.result;save();drawPortrait();
-  };
+  r.onload=()=>{STATE.portrait=r.result;save();drawPortrait();};
   r.readAsDataURL(f);
 };
 
@@ -193,10 +198,15 @@ function renderTalents(){
     box.appendChild(d);
   });
 }
-function addTalent(){if(!talName.value)return;STATE.talents.push({n:talName.value,d:talDesc.value});talName.value="";talDesc.value="";save();renderTalents();}
+function addTalent(){
+  if(!talName.value)return;
+  STATE.talents.push({n:talName.value,d:talDesc.value});
+  talName.value="";talDesc.value="";
+  save();renderTalents();
+}
 
 // Инвентарь / Склад
-function addItem(list,data,other,n,d){data.push({n,d});save(); renderAll();}
+function addItem(data,other,n,d){data.push({n,d});save(); renderAll();}
 function renderList(id,data,other){
   const box=document.getElementById(id);box.innerHTML="";
   data.forEach((it,i)=>{
@@ -207,23 +217,36 @@ function renderList(id,data,other){
     box.appendChild(d);
   });
 }
+
+// Скрытые формы добавления
 function addControls(root,data,other){
   const r=document.getElementById(root);
   const n=document.createElement("input");n.placeholder="Название";
   const d=document.createElement("textarea");d.placeholder="Описание";
   const b=document.createElement("button");b.textContent="Добавить";
-  b.onclick=()=>{if(!n.value)return;addItem(r,data,other,n.value,d.value);n.value="";d.value="";}
+  b.onclick=()=>{if(!n.value)return; addItem(data,other,n.value,d.value); n.value=""; d.value="";};
   r.append(n,d,b);
 }
 
-// Рендер всех элементов
-function renderAll(){renderTalents();renderList("inventory",STATE.inventory,STATE.stash);renderList("stash",STATE.stash,STATE.inventory);drawPortrait();}
+// Показ/скрытие формы
+function toggleForm(id){
+  const f=document.getElementById(id);
+  f.style.display=f.style.display==="block"?"none":"block";
+}
 
-// Добавляем кнопки добавления предметов
-addControls("invAdd",STATE.inventory,STATE.stash);
-addControls("stashAdd",STATE.stash,STATE.inventory);
+function renderAll(){
+  renderTalents();
+  renderList("inventory",STATE.inventory,STATE.stash);
+  renderList("stash",STATE.stash,STATE.inventory);
+  drawPortrait();
+}
 
-// Загружаем localStorage (если есть), иначе показываем начальные значения
+// Добавляем скрытые формы
+addControls("invForm",STATE.inventory,STATE.stash);
+addControls("stashForm",STATE.stash,STATE.inventory);
+addControls("talForm",STATE.talents,null);
+
+// Загрузка localStorage
 load();
 charName.value=STATE.name||"";
 drawPortrait();
