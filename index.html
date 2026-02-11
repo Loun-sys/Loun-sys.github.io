@@ -2,8 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Чарлист — Тьма</title>
-
+<title>Чарлист — Адольф Гитлер</title>
 <style>
 body{
   margin:0;
@@ -12,118 +11,35 @@ body{
   font-family:Segoe UI, sans-serif;
 }
 .wrap{max-width:1200px;margin:auto;padding:20px;}
-h1{
-  text-align:center;
-  letter-spacing:4px;
-  text-transform:uppercase;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:16px;
-}
-
-.card{
-  border:1px solid #333;
-  border-radius:14px;
-  padding:14px;
-  background:#050505;
-  box-shadow:0 0 20px rgba(255,255,255,.05);
-}
-
-.label{
-  font-size:12px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  color:#888;
-  margin-bottom:6px;
-}
-
-input,textarea{
-  width:100%;
-  background:#0b0b0b;
-  border:1px solid #333;
-  color:#eee;
-  border-radius:8px;
-  padding:8px;
-  margin:4px 0;
-}
-
-button{
-  background:#111;
-  border:1px solid #444;
-  color:#ccc;
-  padding:8px;
-  border-radius:8px;
-  cursor:pointer;
-}
+h1{text-align:center;letter-spacing:4px;text-transform:uppercase;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;}
+.card{border:1px solid #333;border-radius:14px;padding:14px;background:#050505;box-shadow:0 0 20px rgba(255,255,255,.05);}
+.label{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#888;margin-bottom:6px;}
+input,textarea{width:100%;background:#0b0b0b;border:1px solid #333;color:#eee;border-radius:8px;padding:8px;margin:4px 0;}
+button{background:#111;border:1px solid #444;color:#ccc;padding:8px;border-radius:8px;cursor:pointer;}
 button:hover{border-color:#aaa;color:#fff;}
-
 .dots{display:flex;gap:6px;flex-wrap:wrap}
-.dot{
-  width:18px;height:18px;border-radius:50%;
-  border:2px solid #666;background:#111;cursor:pointer;
-}
+.dot{width:18px;height:18px;border-radius:50%;border:2px solid #666;background:#111;cursor:pointer;}
 .dot.active{background:#fff;border-color:#fff}
-
-.counter{
-  font-size:11px;
-  color:#666;
-  margin-top:4px;
-}
-
-.item{
-  position:relative;
-  border:1px solid #333;
-  border-radius:10px;
-  padding:10px;
-  margin-top:8px;
-  background:#0a0a0a;
-}
-
-.del{
-  position:absolute;
-  right:8px;top:6px;
-  color:#555;cursor:pointer;
-}
+.counter{font-size:11px;color:#666;margin-top:4px;}
+.item{position:relative;border:1px solid #333;border-radius:10px;padding:10px;margin-top:8px;background:#0a0a0a;}
+.del{position:absolute;right:8px;top:6px;color:#555;cursor:pointer;}
 .del:hover{color:#fff;}
-
-.moveBtn{
-  font-size:12px;
-  margin-top:6px;
-}
-
-#portraitBox{
-  border:1px solid #333;
-  border-radius:12px;
-  height:260px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#444;
-  cursor:pointer;
-  overflow:hidden;
-}
+.moveBtn{font-size:12px;margin-top:6px;}
+#portraitBox{border:1px solid #333;border-radius:12px;height:260px;display:flex;align-items:center;justify-content:center;color:#444;cursor:pointer;overflow:hidden;}
 #portraitBox:hover{border-color:#777;color:#777;}
-#portraitBox img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
+#portraitBox img{width:100%;height:100%;object-fit:cover;}
 </style>
 </head>
-
 <body>
 <div class="wrap">
 <h1>Чарлист — Тьма</h1>
 
 <div class="grid">
-
 <div class="card">
 <div class="label">Персонаж</div>
-<input id="charName" placeholder="Имя">
-<div id="portraitBox" onclick="pickImage()">Портрет</div>
+<input id="charName" placeholder="Имя персонажа">
+<div id="portraitBox" onclick="imgInput.click()">Портрет</div>
 <input id="imgInput" type="file" accept="image/*" hidden>
 </div>
 
@@ -139,7 +55,6 @@ button:hover{border-color:#aaa;color:#fff;}
 <button onclick="addTalent()">Добавить</button>
 <div id="talents"></div>
 </div>
-
 </div>
 
 <div class="grid">
@@ -157,185 +72,108 @@ button:hover{border-color:#aaa;color:#fff;}
 </div>
 
 <script>
-const STORE_KEY="dark_sheet_v2";
-
+const STORE_KEY="dark_sheet_v3";
 let STATE={
-name:"",
-portrait:"",
-stats:{},
-skills:{},
-talents:[],
-inventory:[],
-stash:[]
+  name:"",
+  portrait:"",
+  stats:{},
+  skills:{},
+  talents:[],
+  inventory:[],
+  stash:[]
 };
 
 function save(){localStorage.setItem(STORE_KEY,JSON.stringify(STATE))}
-function load(){
-  const s=localStorage.getItem(STORE_KEY);
-  if(s) STATE=JSON.parse(s);
+function load(){const s=localStorage.getItem(STORE_KEY);if(s) STATE=JSON.parse(s)}
+
+function dotRow(container,key,max,stored={}){
+  let val=stored[key]||0;
+  const wrap=document.createElement("div");wrap.className="dots";
+  const counter=document.createElement("div");counter.className="counter";
+  function redraw(){counter.textContent=val+"/"+max;[...wrap.children].forEach((d,i)=>d.classList.toggle("active",i<val));stored[key]=val;save();}
+  for(let i=1;i<=max;i++){const d=document.createElement("div");d.className="dot";d.onclick=()=>{val=(val===i)?i-1:i;redraw();};wrap.appendChild(d);}
+  container.appendChild(wrap);container.appendChild(counter);redraw();
 }
 
-function dotRow(container,key,max){
-  let val=STATE.stats[key]||0;
-
-  const wrap=document.createElement("div");
-  wrap.className="dots";
-
-  const counter=document.createElement("div");
-  counter.className="counter";
-
-  function redraw(){
-    counter.textContent=val+"/"+max;
-    [...wrap.children].forEach((d,i)=>
-      d.classList.toggle("active",i<val));
-    STATE.stats[key]=val; save();
-  }
-
-  for(let i=1;i<=max;i++){
-    const d=document.createElement("div");
-    d.className="dot";
-    d.onclick=()=>{
-      val=(val===i)?i-1:i;
-      redraw();
-    };
-    wrap.appendChild(d);
-  }
-
-  container.appendChild(wrap);
-  container.appendChild(counter);
-  redraw();
+function statBlock(name,max,key){
+  const c=document.createElement("div");const l=document.createElement("div");l.className="label";l.textContent=name;c.appendChild(l);dotRow(c,key,max,STATE.stats);return c;
 }
 
-function skillSet(id,names){
+const statsDiv=document.getElementById("stats");
+[["Телосложение",4,"body"],["Смекалка",5,"mind"],["Ловкость",2,"agl"],["Эмпатия",3,"emp"]].forEach(s=>statsDiv.appendChild(statBlock(s[0],s[1],"stat_"+s[2])));
+
+function skillSet(id,names,keyPrefix){
   const root=document.getElementById(id);
   names.forEach(n=>{
     const c=document.createElement("div");
-    const l=document.createElement("div");
-    l.className="label";
-    l.textContent=n;
-    c.appendChild(l);
-    dotRow(c,"skill_"+n,5);
+    const l=document.createElement("div");l.className="label";l.textContent=n;c.appendChild(l);
+    dotRow(c,keyPrefix+n,5,STATE.skills);
     root.appendChild(c);
   });
 }
 
-function renderTalents(){
-  const box=document.getElementById("talents");
-  box.innerHTML="";
-  STATE.talents.forEach((t,i)=>{
-    const d=document.createElement("div");
-    d.className="item";
-    d.innerHTML="<div class='del'>✕</div><b>"+t.n+"</b><div>"+t.d+"</div>";
-    d.querySelector(".del").onclick=()=>{
-      STATE.talents.splice(i,1); save(); renderTalents();
-    };
-    box.appendChild(d);
-  });
-}
+skillSet("s_body",["Сила","Выносливость","Драка"],"skill_body_");
+skillSet("s_agl",["Скрытность","Проворность","Стрельба"],"skill_agl_");
+skillSet("s_mind",["Наблюдательность","Анализ","Знания"],"skill_mind_");
+skillSet("s_emp",["Проницательность","Влияние","Лечение"],"skill_emp_");
 
-function addTalent(){
-  if(!talName.value) return;
-  STATE.talents.push({n:talName.value,d:talDesc.value});
-  talName.value=""; talDesc.value="";
-  save(); renderTalents();
+function drawPortrait(){
+  const box=document.getElementById("portraitBox");
+  box.innerHTML=STATE.portrait?"<img src='"+STATE.portrait+"'>":"Портрет";
 }
-
-function renderList(id,data,other){
-  const box=document.getElementById(id);
-  box.innerHTML="";
-  data.forEach((it,i)=>{
-    const d=document.createElement("div");
-    d.className="item";
-    d.innerHTML="<div class='del'>✕</div><b>"+it.n+"</b><div>"+it.d+"</div>";
-    d.querySelector(".del").onclick=()=>{
-      data.splice(i,1); save(); renderAll();
-    };
-    if(other){
-      const b=document.createElement("button");
-      b.textContent="Переместить";
-      b.className="moveBtn";
-      b.onclick=()=>{
-        other.push(it);
-        data.splice(i,1);
-        save(); renderAll();
-      };
-      d.appendChild(b);
-    }
-    box.appendChild(d);
-  });
-}
-
-function addControls(rootId,data,other){
-  const r=document.getElementById(rootId);
-  const n=document.createElement("input");
-  n.placeholder="Название";
-  const d=document.createElement("textarea");
-  d.placeholder="Описание";
-  const b=document.createElement("button");
-  b.textContent="Добавить";
-  b.onclick=()=>{
-    if(!n.value) return;
-    data.push({n:n.value,d:d.value});
-    n.value=""; d.value="";
-    save(); renderAll();
-  };
-  r.append(n,d,b);
-}
-
-function renderAll(){
-  renderTalents();
-  renderList("inventory",STATE.inventory,STATE.stash);
-  renderList("stash",STATE.stash,STATE.inventory);
-}
-
-function pickImage(){ imgInput.click(); }
+const imgInput=document.getElementById("imgInput");
 imgInput.onchange=e=>{
   const f=e.target.files[0];
   const r=new FileReader();
   r.onload=()=>{
-    STATE.portrait=r.result;
-    save(); drawPortrait();
+    STATE.portrait=r.result;save();drawPortrait();
   };
   r.readAsDataURL(f);
 };
 
-function drawPortrait(){
-  const box=document.getElementById("portraitBox");
-  box.innerHTML=STATE.portrait
-    ? "<img src='"+STATE.portrait+"'>"
-    : "Портрет";
+const charName=document.getElementById("charName");
+charName.value=STATE.name||"";
+charName.oninput=e=>{STATE.name=e.target.value;save();};
+
+function addItem(list,data,other,n,d){
+  data.push({n,d});
+  save(); renderAll();
+}
+function renderList(id,data,other){
+  const box=document.getElementById(id);box.innerHTML="";
+  data.forEach((it,i)=>{
+    const d=document.createElement("div");d.className="item";
+    d.innerHTML="<div class='del'>✕</div><b>"+it.n+"</b><div>"+it.d+"</div>";
+    d.querySelector(".del").onclick=()=>{data.splice(i,1);save();renderAll();}
+    if(other){const b=document.createElement("button");b.className="moveBtn";b.textContent="Переместить";b.onclick=()=>{other.push(it);data.splice(i,1);save();renderAll()};d.appendChild(b);}
+    box.appendChild(d);
+  });
 }
 
-load();
+function addControls(root,data,other){
+  const r=document.getElementById(root);
+  const n=document.createElement("input");n.placeholder="Название";
+  const d=document.createElement("textarea");d.placeholder="Описание";
+  const b=document.createElement("button");b.textContent="Добавить";
+  b.onclick=()=>{if(!n.value)return;addItem(r,data,other,n.value,d.value);n.value="";d.value="";}
+  r.append(n,d,b);
+}
 
-charName.value=STATE.name||"";
-charName.oninput=e=>{STATE.name=e.target.value; save();};
+function renderTalents(){
+  const box=document.getElementById("talents");box.innerHTML="";
+  STATE.talents.forEach((t,i)=>{
+    const d=document.createElement("div");d.className="item";
+    d.innerHTML="<div class='del'>✕</div><b>"+t.n+"</b><div>"+t.d+"</div>";
+    d.querySelector(".del").onclick=()=>{STATE.talents.splice(i,1);save();renderTalents();}
+    box.appendChild(d);
+  });
+}
+function addTalent(){if(!talName.value)return;STATE.talents.push({n:talName.value,d:talDesc.value});talName.value="";talDesc.value="";save();renderTalents();}
 
-[
-["Телосложение",4],
-["Смекалка",5],
-["Ловкость",2],
-["Эмпатия",3]
-].forEach(s=>{
-  const c=document.createElement("div");
-  const l=document.createElement("div");
-  l.className="label";
-  l.textContent=s[0];
-  c.appendChild(l);
-  dotRow(c,"stat_"+s[0],s[1]);
-  stats.appendChild(c);
-});
+function renderAll(){renderTalents();renderList("inventory",STATE.inventory,STATE.stash);renderList("stash",STATE.stash,STATE.inventory);drawPortrait();}
+addControls("invAdd",STATE.inventory,STATE.stash);addControls("stashAdd",STATE.stash,STATE.inventory);
 
-skillSet("s_body",["Сила","Выносливость","Драка"]);
-skillSet("s_agl",["Скрытность","Проворность","Стрельба"]);
-skillSet("s_mind",["Наблюдательность","Анализ","Знания"]);
-skillSet("s_emp",["Проницательность","Влияние","Лечение"]);
-
-addControls("invAdd",STATE.inventory,STATE.stash);
-addControls("stashAdd",STATE.stash,STATE.inventory);
-
-drawPortrait();
-renderAll();
+load();charName.value=STATE.name||"";drawPortrait();renderAll();
 </script>
 </body>
 </html>
