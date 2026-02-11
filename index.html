@@ -29,8 +29,6 @@ button:hover{border-color:#aaa;color:#fff;}
 #portraitBox{border:1px solid #333;border-radius:12px;height:260px;display:flex;align-items:center;justify-content:center;color:#444;cursor:pointer;overflow:hidden;margin-bottom:10px;}
 #portraitBox:hover{border-color:#777;color:#777;}
 #portraitBox img{width:100%;height:100%;object-fit:cover;}
-
-/* Новые стили для скрытых форм */
 .addBtn{position:absolute;top:10px;right:10px;width:24px;height:24px;border-radius:50%;border:none;font-size:18px;font-weight:bold;line-height:18px;text-align:center;cursor:pointer;color:#ccc;background:#111;}
 .addBtn:hover{color:#fff;}
 .addForm{display:none;margin-top:6px;}
@@ -58,11 +56,7 @@ button:hover{border-color:#aaa;color:#fff;}
 <div class="card" id="talCard">
 <div class="label">Таланты</div>
 <button class="addBtn" onclick="toggleForm('talForm')">+</button>
-<div class="addForm" id="talForm">
-<input id="talName" placeholder="Название">
-<textarea id="talDesc" placeholder="Описание"></textarea>
-<button onclick="addTalent()">Добавить</button>
-</div>
+<div class="addForm" id="talForm"></div>
 <div id="talents"></div>
 </div>
 </div>
@@ -89,10 +83,9 @@ button:hover{border-color:#aaa;color:#fff;}
 <script>
 const STORE_KEY="dark_sheet_final";
 
-// Начальные значения
 let STATE = {
   name: "Адольф Грау",
-  portrait: "",
+  portrait: "https://i.pinimg.com/736x/31/31/be/3131be8cf94d75abe81a15f97e8c70dc.jpg",
   stats: {
     stat_body: 4,
     stat_agl: 2,
@@ -115,7 +108,11 @@ let STATE = {
     skill_emp_Лечение:0
   },
   talents: [
-    {n:"Изобретатель", d:"При первом усовершенствовании предмета, персонаж не тратит компонент."}
+    {n:"Изобретатель", d:"При первом усовершенствовании предмета, персонаж не тратит компонент."},
+    {n:"Ритуалистика", d:'Вы владеете ритуальной магией. Персонажу доступны следующие ритуалы: <a href="https://docs.google.com/document/d/1TjCmSpLfW43ABwKMRuDI0SVO7V-yb8NkzwuFxlVsFq4/edit?usp=sharing" target="_blank">*Займ у будущего*</a>'},
+    {n:"Девять Жизней", d:"Вы можете перекинуть кубы при броске на травму. Выбор выпавших травм опционален."},
+    {n:"Упорный", d:"Вы можете пойти на Риск дважды"},
+    {n:"Чугунный Козырь", d:"Вы создали себе еще одну конечность — руку, которая управляется вашей волей. Вы имеете возможность держать предметы в этой конечности. Конечность не обладает тактильностью, а ее ранение не причиняет вам боли."}
   ],
   inventory:[
     {n:"Глефа", d:"Оружие. Двуручное. 2 прочности. 3 урона; дистанция ближняя; режущее; сбивающее; разоружающее; освященное."}
@@ -128,7 +125,6 @@ let STATE = {
 function save(){localStorage.setItem(STORE_KEY,JSON.stringify(STATE))}
 function load(){const s=localStorage.getItem(STORE_KEY);if(s) STATE=JSON.parse(s)}
 
-// Точки характеристик и навыков
 function dotRow(container,key,max,stored={}){
   let val=stored[key]||0;
   const wrap=document.createElement("div");wrap.className="dots";
@@ -170,7 +166,6 @@ skillSet("s_agl",["Скрытность","Проворность","Стрель�
 skillSet("s_mind",["Наблюдательность","Анализ","Знания","Ремесло"],"skill_mind_");
 skillSet("s_emp",["Проницательность","Влияние","Лечение"],"skill_emp_");
 
-// Портрет
 function drawPortrait(){
   const box=document.getElementById("portraitBox");
   box.innerHTML=STATE.portrait?"<img src='"+STATE.portrait+"'>":"Портрет";
@@ -183,12 +178,10 @@ imgInput.onchange=e=>{
   r.readAsDataURL(f);
 };
 
-// Имя
 const charName=document.getElementById("charName");
 charName.value=STATE.name||"";
 charName.oninput=e=>{STATE.name=e.target.value;save();};
 
-// Таланты
 function renderTalents(){
   const box=document.getElementById("talents");box.innerHTML="";
   STATE.talents.forEach((t,i)=>{
@@ -198,14 +191,9 @@ function renderTalents(){
     box.appendChild(d);
   });
 }
-function addTalent(){
-  if(!talName.value)return;
-  STATE.talents.push({n:talName.value,d:talDesc.value});
-  talName.value="";talDesc.value="";
-  save();renderTalents();
-}
 
-// Инвентарь / Склад
+function addTalent(){if(!talName.value)return;STATE.talents.push({n:talName.value,d:talDesc.value});talName.value="";talDesc.value="";save();renderTalents();}
+
 function addItem(data,other,n,d){data.push({n,d});save(); renderAll();}
 function renderList(id,data,other){
   const box=document.getElementById(id);box.innerHTML="";
@@ -218,7 +206,6 @@ function renderList(id,data,other){
   });
 }
 
-// Скрытые формы добавления
 function addControls(root,data,other){
   const r=document.getElementById(root);
   const n=document.createElement("input");n.placeholder="Название";
@@ -228,25 +215,13 @@ function addControls(root,data,other){
   r.append(n,d,b);
 }
 
-// Показ/скрытие формы
-function toggleForm(id){
-  const f=document.getElementById(id);
-  f.style.display=f.style.display==="block"?"none":"block";
-}
+function toggleForm(id){const f=document.getElementById(id);f.style.display=f.style.display==="block"?"none":"block";}
+function renderAll(){renderTalents();renderList("inventory",STATE.inventory,STATE.stash);renderList("stash",STATE.stash,STATE.inventory);drawPortrait();}
 
-function renderAll(){
-  renderTalents();
-  renderList("inventory",STATE.inventory,STATE.stash);
-  renderList("stash",STATE.stash,STATE.inventory);
-  drawPortrait();
-}
-
-// Добавляем скрытые формы
 addControls("invForm",STATE.inventory,STATE.stash);
 addControls("stashForm",STATE.stash,STATE.inventory);
 addControls("talForm",STATE.talents,null);
 
-// Загрузка localStorage
 load();
 charName.value=STATE.name||"";
 drawPortrait();
