@@ -3,44 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <title>Чарлист — Тьма</title>
+
 <style>
 body{
   margin:0;
   background:#000;
   color:#e5e5e5;
-  font-family: "Segoe UI", sans-serif;
+  font-family:Segoe UI, sans-serif;
 }
+.wrap{max-width:1200px;margin:auto;padding:20px;}
 h1{
   text-align:center;
-  letter-spacing:3px;
+  letter-spacing:4px;
   text-transform:uppercase;
 }
-.wrap{
-  max-width:1200px;
-  margin:auto;
-  padding:20px;
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:16px;
 }
+
 .card{
   border:1px solid #333;
   border-radius:14px;
   padding:14px;
-  margin:10px 0;
   background:#050505;
-  box-shadow:0 0 20px rgba(255,255,255,0.05);
+  box-shadow:0 0 20px rgba(255,255,255,.05);
 }
-.grid{
-  display:grid;
-  grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-  gap:16px;
-}
+
 .label{
   font-size:12px;
-  text-transform:uppercase;
   letter-spacing:2px;
+  text-transform:uppercase;
   color:#888;
   margin-bottom:6px;
 }
-input, textarea{
+
+input,textarea{
   width:100%;
   background:#0b0b0b;
   border:1px solid #333;
@@ -49,27 +49,28 @@ input, textarea{
   padding:8px;
   margin:4px 0;
 }
+
 button{
   background:#111;
   border:1px solid #444;
-  color:#ddd;
+  color:#ccc;
   padding:8px;
   border-radius:8px;
   cursor:pointer;
 }
-button:hover{ border-color:#aaa; color:#fff; }
+button:hover{border-color:#aaa;color:#fff;}
 
-.dots{ display:flex; gap:6px; flex-wrap:wrap; }
+.dots{display:flex;gap:6px;flex-wrap:wrap}
 .dot{
-  width:18px; height:18px;
-  border-radius:50%;
-  border:2px solid #666;
-  background:#111;
-  cursor:pointer;
+  width:18px;height:18px;border-radius:50%;
+  border:2px solid #666;background:#111;cursor:pointer;
 }
-.dot.active{
-  background:#fff;
-  border-color:#fff;
+.dot.active{background:#fff;border-color:#fff}
+
+.counter{
+  font-size:11px;
+  color:#666;
+  margin-top:4px;
 }
 
 .item{
@@ -80,29 +81,39 @@ button:hover{ border-color:#aaa; color:#fff; }
   margin-top:8px;
   background:#0a0a0a;
 }
+
 .del{
   position:absolute;
-  top:6px; right:8px;
-  cursor:pointer;
-  color:#666;
-  font-size:14px;
+  right:8px;top:6px;
+  color:#555;cursor:pointer;
 }
-.del:hover{ color:#fff; }
+.del:hover{color:#fff;}
 
 .moveBtn{
-  margin-top:6px;
   font-size:12px;
+  margin-top:6px;
 }
 
-img{
-  width:100%;
-  border-radius:12px;
+#portraitBox{
   border:1px solid #333;
+  border-radius:12px;
+  height:260px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#444;
+  cursor:pointer;
+  overflow:hidden;
+}
+#portraitBox:hover{border-color:#777;color:#777;}
+#portraitBox img{
+  width:100%;
+  height:100%;
   object-fit:cover;
-  max-height:300px;
 }
 </style>
 </head>
+
 <body>
 <div class="wrap">
 <h1>Чарлист — Тьма</h1>
@@ -111,9 +122,9 @@ img{
 
 <div class="card">
 <div class="label">Персонаж</div>
-<input placeholder="Имя">
-<input type="file" accept="image/*" onchange="loadImg(event)">
-<img id="portrait">
+<input id="charName" placeholder="Имя">
+<div id="portraitBox" onclick="pickImage()">Портрет</div>
+<input id="imgInput" type="file" accept="image/*" hidden>
 </div>
 
 <div class="card">
@@ -125,80 +136,75 @@ img{
 <div class="label">Таланты</div>
 <input id="talName" placeholder="Название">
 <textarea id="talDesc" placeholder="Описание"></textarea>
-<button onclick="addTalent()">Добавить талант</button>
+<button onclick="addTalent()">Добавить</button>
 <div id="talents"></div>
 </div>
 
 </div>
 
 <div class="grid">
-
 <div class="card"><div class="label">Телосложение — навыки</div><div id="s_body"></div></div>
 <div class="card"><div class="label">Ловкость — навыки</div><div id="s_agl"></div></div>
 <div class="card"><div class="label">Смекалка — навыки</div><div id="s_mind"></div></div>
 <div class="card"><div class="label">Эмпатия — навыки</div><div id="s_emp"></div></div>
-
 </div>
 
 <div class="grid">
-<div class="card">
-<div class="label">Инвентарь</div>
-<div id="invAdd"></div>
-<div id="inventory"></div>
-</div>
-
-<div class="card">
-<div class="label">Склад</div>
-<div id="stashAdd"></div>
-<div id="stash"></div>
-</div>
+<div class="card"><div class="label">Инвентарь</div><div id="invAdd"></div><div id="inventory"></div></div>
+<div class="card"><div class="label">Склад</div><div id="stashAdd"></div><div id="stash"></div></div>
 </div>
 
 </div>
 
 <script>
-function dotRow(container, max){
-  let val=0;
+const STORE_KEY="dark_sheet_v2";
+
+let STATE={
+name:"",
+portrait:"",
+stats:{},
+skills:{},
+talents:[],
+inventory:[],
+stash:[]
+};
+
+function save(){localStorage.setItem(STORE_KEY,JSON.stringify(STATE))}
+function load(){
+  const s=localStorage.getItem(STORE_KEY);
+  if(s) STATE=JSON.parse(s);
+}
+
+function dotRow(container,key,max){
+  let val=STATE.stats[key]||0;
+
   const wrap=document.createElement("div");
   wrap.className="dots";
+
+  const counter=document.createElement("div");
+  counter.className="counter";
+
+  function redraw(){
+    counter.textContent=val+"/"+max;
+    [...wrap.children].forEach((d,i)=>
+      d.classList.toggle("active",i<val));
+    STATE.stats[key]=val; save();
+  }
+
   for(let i=1;i<=max;i++){
     const d=document.createElement("div");
     d.className="dot";
     d.onclick=()=>{
-      val = (val===i)? i-1 : i;
-      [...wrap.children].forEach((c,idx)=>{
-        c.classList.toggle("active", idx < val);
-      });
-      label.textContent = val+"/"+max;
+      val=(val===i)?i-1:i;
+      redraw();
     };
     wrap.appendChild(d);
   }
-  const label=document.createElement("div");
-  label.style.fontSize="12px";
-  label.style.color="#777";
-  label.textContent="0/"+max;
+
   container.appendChild(wrap);
-  container.appendChild(label);
+  container.appendChild(counter);
+  redraw();
 }
-
-function statBlock(name,max){
-  const c=document.createElement("div");
-  c.className="card";
-  const l=document.createElement("div");
-  l.className="label";
-  l.textContent=name;
-  c.appendChild(l);
-  dotRow(c,max);
-  return c;
-}
-
-const statsDiv=document.getElementById("stats");
-[
-["Телосложение",4],
-["Смекалка",5],
-["Ловкость",2],
-["Эмпатия",3]
-].forEach(s=>statsDiv.appendChild(statBlock(s[0],s[1])));
 
 function skillSet(id,names){
   const root=document.getElementById(id);
@@ -208,69 +214,128 @@ function skillSet(id,names){
     l.className="label";
     l.textContent=n;
     c.appendChild(l);
-    dotRow(c,5);
+    dotRow(c,"skill_"+n,5);
     root.appendChild(c);
   });
 }
+
+function renderTalents(){
+  const box=document.getElementById("talents");
+  box.innerHTML="";
+  STATE.talents.forEach((t,i)=>{
+    const d=document.createElement("div");
+    d.className="item";
+    d.innerHTML="<div class='del'>✕</div><b>"+t.n+"</b><div>"+t.d+"</div>";
+    d.querySelector(".del").onclick=()=>{
+      STATE.talents.splice(i,1); save(); renderTalents();
+    };
+    box.appendChild(d);
+  });
+}
+
+function addTalent(){
+  if(!talName.value) return;
+  STATE.talents.push({n:talName.value,d:talDesc.value});
+  talName.value=""; talDesc.value="";
+  save(); renderTalents();
+}
+
+function renderList(id,data,other){
+  const box=document.getElementById(id);
+  box.innerHTML="";
+  data.forEach((it,i)=>{
+    const d=document.createElement("div");
+    d.className="item";
+    d.innerHTML="<div class='del'>✕</div><b>"+it.n+"</b><div>"+it.d+"</div>";
+    d.querySelector(".del").onclick=()=>{
+      data.splice(i,1); save(); renderAll();
+    };
+    if(other){
+      const b=document.createElement("button");
+      b.textContent="Переместить";
+      b.className="moveBtn";
+      b.onclick=()=>{
+        other.push(it);
+        data.splice(i,1);
+        save(); renderAll();
+      };
+      d.appendChild(b);
+    }
+    box.appendChild(d);
+  });
+}
+
+function addControls(rootId,data,other){
+  const r=document.getElementById(rootId);
+  const n=document.createElement("input");
+  n.placeholder="Название";
+  const d=document.createElement("textarea");
+  d.placeholder="Описание";
+  const b=document.createElement("button");
+  b.textContent="Добавить";
+  b.onclick=()=>{
+    if(!n.value) return;
+    data.push({n:n.value,d:d.value});
+    n.value=""; d.value="";
+    save(); renderAll();
+  };
+  r.append(n,d,b);
+}
+
+function renderAll(){
+  renderTalents();
+  renderList("inventory",STATE.inventory,STATE.stash);
+  renderList("stash",STATE.stash,STATE.inventory);
+}
+
+function pickImage(){ imgInput.click(); }
+imgInput.onchange=e=>{
+  const f=e.target.files[0];
+  const r=new FileReader();
+  r.onload=()=>{
+    STATE.portrait=r.result;
+    save(); drawPortrait();
+  };
+  r.readAsDataURL(f);
+};
+
+function drawPortrait(){
+  const box=document.getElementById("portraitBox");
+  box.innerHTML=STATE.portrait
+    ? "<img src='"+STATE.portrait+"'>"
+    : "Портрет";
+}
+
+load();
+
+charName.value=STATE.name||"";
+charName.oninput=e=>{STATE.name=e.target.value; save();};
+
+[
+["Телосложение",4],
+["Смекалка",5],
+["Ловкость",2],
+["Эмпатия",3]
+].forEach(s=>{
+  const c=document.createElement("div");
+  const l=document.createElement("div");
+  l.className="label";
+  l.textContent=s[0];
+  c.appendChild(l);
+  dotRow(c,"stat_"+s[0],s[1]);
+  stats.appendChild(c);
+});
 
 skillSet("s_body",["Сила","Выносливость","Драка"]);
 skillSet("s_agl",["Скрытность","Проворность","Стрельба"]);
 skillSet("s_mind",["Наблюдательность","Анализ","Знания"]);
 skillSet("s_emp",["Проницательность","Влияние","Лечение"]);
 
-function loadImg(e){
-  const f=e.target.files[0];
-  if(f) document.getElementById("portrait").src=URL.createObjectURL(f);
-}
+addControls("invAdd",STATE.inventory,STATE.stash);
+addControls("stashAdd",STATE.stash,STATE.inventory);
 
-function addListControls(targetAdd, targetList, otherList){
-  const wrap=document.getElementById(targetAdd);
-  const name=document.createElement("input");
-  name.placeholder="Название";
-  const desc=document.createElement("textarea");
-  desc.placeholder="Описание";
-  const btn=document.createElement("button");
-  btn.textContent="Добавить";
-  wrap.appendChild(name);
-  wrap.appendChild(desc);
-  wrap.appendChild(btn);
-
-  btn.onclick=()=>{
-    if(!name.value) return;
-    addItem(targetList, otherList, name.value, desc.value);
-    name.value=""; desc.value="";
-  };
-}
-
-function addItem(listId, otherId, name, desc){
-  const list=document.getElementById(listId);
-  const div=document.createElement("div");
-  div.className="item";
-  div.innerHTML="<div class='del'>✕</div><b>"+name+"</b><div>"+desc+"</div>";
-  div.querySelector(".del").onclick=()=>div.remove();
-  if(otherId){
-    const mv=document.createElement("button");
-    mv.textContent="Переместить";
-    mv.className="moveBtn";
-    mv.onclick=()=>{
-      div.remove();
-      document.getElementById(otherId).appendChild(div);
-    };
-    div.appendChild(mv);
-  }
-  list.appendChild(div);
-}
-
-addListControls("invAdd","inventory","stash");
-addListControls("stashAdd","stash","inventory");
-
-function addTalent(){
-  addItem("talents",null,
-    talName.value,
-    talDesc.value
-  );
-  talName.value=""; talDesc.value="";
-}
+drawPortrait();
+renderAll();
 </script>
 </body>
 </html>
