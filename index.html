@@ -9,47 +9,33 @@
 <style>
 body{
   margin:0;
-  background:
-    radial-gradient(circle at 20% 20%, #1b1b1b, #0f0f0f 60%),
-    repeating-linear-gradient(45deg,#111,#111 10px,#0e0e0e 10px,#0e0e0e 20px);
+  background:#0f0f0f;
   font-family:"Spectral", serif;
-  color:#1a1a1a;
 }
 
 .page{
   max-width:1100px;
   margin:30px auto;
-  background:
-    linear-gradient(#efe6c9,#e4d7b3);
-  box-shadow:
-    0 0 0 2px #2a2a2a,
-    0 0 40px rgba(0,0,0,.7),
-    inset 0 0 120px rgba(0,0,0,.15);
+  background:#e9ddbb;
   padding:28px;
+  box-shadow:0 0 0 2px #222, 0 0 60px rgba(0,0,0,.8);
   position:relative;
 }
 
 .page:before{
   content:"";
-  position:absolute;
-  inset:0;
-  background:
-    repeating-linear-gradient(
-      0deg,
-      rgba(0,0,0,.03),
-      rgba(0,0,0,.03) 2px,
-      transparent 2px,
-      transparent 4px);
+  position:absolute; inset:0;
   pointer-events:none;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(0,0,0,.25), transparent 40%),
+    radial-gradient(circle at 90% 90%, rgba(0,0,0,.25), transparent 40%);
 }
 
 h1{
-  margin:0 0 18px 0;
   font-family:"IM Fell English", serif;
   font-size:40px;
-  letter-spacing:1px;
-  border-bottom:3px double #2b2b2b;
-  padding-bottom:8px;
+  margin:0 0 20px;
+  border-bottom:3px double #222;
 }
 
 .grid{
@@ -59,61 +45,46 @@ h1{
 }
 
 .card{
-  background:#f6edd2;
-  border:1px solid #2b2b2b;
-  box-shadow:
-    inset 0 0 18px rgba(0,0,0,.12),
-    0 2px 6px rgba(0,0,0,.25);
+  background:#f4ecd2;
+  border:1px solid #222;
   padding:14px;
-  position:relative;
+  box-shadow: inset 0 0 18px rgba(0,0,0,.12), 0 2px 6px rgba(0,0,0,.3);
 }
 
 .label{
   font-family:"IM Fell English", serif;
   font-size:18px;
-  letter-spacing:.5px;
   border-bottom:1px solid #333;
-  padding-bottom:4px;
   margin-bottom:10px;
-}
-
-.section-gap{
-  margin-bottom:12px;
+  padding-bottom:4px;
 }
 
 .namebox{
-  font-size:20px;
-  font-weight:600;
   border:1px solid #333;
   padding:6px;
   background:#fffdf5;
+  font-weight:600;
 }
 
 .portrait{
   width:100%;
   height:420px;
-  border:2px solid #2b2b2b;
-  background:#000;
-  overflow:hidden;
-  box-shadow: inset 0 0 20px rgba(0,0,0,.5);
+  border:2px solid #222;
+  background:#111;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 .portrait img{
   width:100%;
   height:100%;
   object-fit:contain;
-  background:#111;
 }
 
-.attr{
-  display:flex;
-  justify-content:space-between;
-  margin:6px 0;
-  font-size:16px;
-}
-
-.track{
+.dots span{
+  cursor:pointer;
+  font-size:20px;
   letter-spacing:3px;
-  font-size:18px;
 }
 
 .skill{
@@ -121,60 +92,19 @@ h1{
   justify-content:space-between;
   border-bottom:1px dotted #777;
   margin:4px 0;
-  padding-bottom:2px;
-  font-size:15px;
 }
 
-.item{
+.item, .talent{
   border:1px dashed #555;
   background:#fffdf6;
   padding:8px;
   margin:8px 0;
-  box-shadow: inset 0 0 10px rgba(0,0,0,.08);
-}
-
-.item b{
-  font-size:15px;
+  font-size:14px;
 }
 
 .talent{
-  border-left:4px solid #333;
-  background:#fffdf6;
-  padding:8px 10px;
-  margin:8px 0;
-  box-shadow: inset 0 0 10px rgba(0,0,0,.08);
+  border-left:4px solid #222;
 }
-
-.small-btn{
-  border:1px solid #444;
-  background:#e8dcc0;
-  font-size:12px;
-  padding:2px 6px;
-  cursor:pointer;
-}
-.small-btn:hover{
-  background:#d9ccb0;
-}
-
-.corner-plus{
-  position:absolute;
-  top:6px;
-  right:8px;
-  font-size:16px;
-  cursor:pointer;
-  opacity:.55;
-}
-.corner-plus:hover{ opacity:1; }
-
-.delete{
-  float:right;
-  cursor:pointer;
-  opacity:.35;
-  font-size:13px;
-}
-.delete:hover{ opacity:.8; }
-
-a{ color:#222; }
 
 @media(max-width:900px){
   .grid{ grid-template-columns:1fr; }
@@ -191,25 +121,32 @@ a{ color:#222; }
 <!-- LEFT -->
 <div>
 
-<div class="card section-gap">
+<div class="card">
 <div class="label">Имя</div>
 <div class="namebox">Адольф Грау</div>
 </div>
 
-<div class="card section-gap">
+<div class="card">
 <div class="label">Портрет</div>
 <div class="portrait">
 <img src="https://i.pinimg.com/736x/31/31/be/3131be8cf94d75abe81a15f97e8c70dc.jpg">
 </div>
 </div>
 
-<div class="card section-gap">
+<div class="card">
 <div class="label">Характеристики</div>
 
-<div class="attr">Телосложение <span class="track">●●●●○ (4/5)</span></div>
-<div class="attr">Ловкость <span class="track">●●○○○ (2/5)</span></div>
-<div class="attr">Смекалка <span class="track">●●●●● (5/5)</span></div>
-<div class="attr">Эмпатия <span class="track">●●●○○ (3/5)</span></div>
+<div>Телосложение
+<div class="dots" data-key="attr_body"></div></div>
+
+<div>Ловкость
+<div class="dots" data-key="attr_agl"></div></div>
+
+<div>Смекалка
+<div class="dots" data-key="attr_mind"></div></div>
+
+<div>Эмпатия
+<div class="dots" data-key="attr_emp"></div></div>
 
 </div>
 
@@ -218,62 +155,58 @@ a{ color:#222; }
 <!-- RIGHT -->
 <div>
 
-<div class="card section-gap">
+<div class="card">
 <div class="label">Телосложение — навыки</div>
-<div style="margin-bottom:6px;"></div>
 <div class="skill"><span>Выносливость</span><b>0</b></div>
 <div class="skill"><span>Драка</span><b>5</b></div>
+<div class="skill"><span>Сила</span><b>0</b></div>
 </div>
 
-<div class="card section-gap">
+<div class="card">
 <div class="label">Ловкость — навыки</div>
-<div style="margin-bottom:6px;"></div>
-<div class="skill"><span>Сила</span><b>0</b></div>
 <div class="skill"><span>Проворство</span><b>0</b></div>
 <div class="skill"><span>Скрытность</span><b>0</b></div>
 <div class="skill"><span>Стрельба</span><b>0</b></div>
 </div>
 
-<div class="card section-gap">
+<div class="card">
 <div class="label">Смекалка — навыки</div>
-<div style="margin-bottom:6px;"></div>
 <div class="skill"><span>Анализ</span><b>1</b></div>
 <div class="skill"><span>Знания</span><b>0</b></div>
 <div class="skill"><span>Наблюдательность</span><b>4</b></div>
 <div class="skill"><span>Ремесло</span><b>5</b></div>
 </div>
 
-<div class="card section-gap">
+<div class="card">
 <div class="label">Эмпатия — навыки</div>
-<div style="margin-bottom:6px;"></div>
 <div class="skill"><span>Влияние</span><b>0</b></div>
 <div class="skill"><span>Лечение</span><b>0</b></div>
 <div class="skill"><span>Проницательность</span><b>0</b></div>
 </div>
 
-<div class="card section-gap">
+<div class="card">
 <div class="label">Таланты</div>
 
 <div class="talent"><b>Изобретатель</b><br>
-При первом усовершенствовании предмета, персонаж не тратит компонент.</div>
+При первом усовершенствовании предмета не тратится компонент.</div>
 
 <div class="talent"><b>Ритуалистика</b><br>
-Вы владеете ритуальной магией. Доступен ритуал:
-<a href="https://docs.google.com/document/d/1TjCmSpLfW43ABwKMRuDI0SVO7V-yb8NkzwuFxlVsFq4/edit?usp=sharing" target="_blank">Займ у будущего</a>
-</div>
+Доступен ритуал:
+<a target="_blank" href="https://docs.google.com/document/d/1TjCmSpLfW43ABwKMRuDI0SVO7V-yb8NkzwuFxlVsFq4/edit?usp=sharing">
+Займ у будущего</a></div>
 
 <div class="talent"><b>Девять Жизней</b><br>
-Вы можете перекинуть кубы при броске на травму. Выбор травм опционален.</div>
+Перекидывание кубов травмы.</div>
 
 <div class="talent"><b>Упорный</b><br>
-Вы можете пойти на Риск дважды.</div>
+Риск дважды.</div>
 
 <div class="talent"><b>Чугунный Козырь</b><br>
-Дополнительная управляемая рука. Может держать предметы, не чувствует боли.</div>
+Дополнительная управляемая рука.</div>
 
 </div>
 
-<div class="card section-gap">
+<div class="card">
 <div class="label">Инвентарь</div>
 
 <div class="item"><b>Глефа</b><br>
@@ -283,27 +216,56 @@ a{ color:#222; }
 Доспех. 5 прочности. +3 к кубам против дьявольщины; освященное.</div>
 
 <div class="item"><b>Набор инструментов</b><br>
-3 прочности. Бонус к проверкам ремесла.</div>
+3 прочности. Бонус к ремеслу.</div>
 
-<div class="item"><b>Фонарь</b></div>
+<div class="item"><b>Фонарь</b><br>
+Снаряжение. Источник света.</div>
 
-<div class="item"><b>Павеза</b></div>
+<div class="item"><b>Павеза</b><br>
+Щит. 4 прочности. Блок урона и защита ловкости.</div>
 
-<div class="item"><b>Музыкальный проигрыватель</b></div>
+<div class="item"><b>Музыкальный проигрыватель</b><br>
+Артефакт с функцией записи и воспроизведения.</div>
 
 </div>
 
 <div class="card">
 <div class="label">Склад</div>
 
-<div class="item"><b>Легкий арбалет</b></div>
-<div class="item"><b>Компонент</b> — 10 шт.</div>
-<div class="item"><b>Ящик с деталями</b></div>
+<div class="item"><b>Легкий арбалет</b><br>
+1 прочность. 2 урона; средняя дистанция; тихое.</div>
+
+<div class="item"><b>Компоненты</b><br>
+9 штук.</div>
+
+<div class="item"><b>Ящик с деталями</b><br>
+Разбор дает 1 компонент при успехе ремесла.</div>
 
 </div>
 
 </div>
 </div>
 </div>
+
+<script>
+function renderDots(el, max, val){
+  el.innerHTML="";
+  for(let i=1;i<=max;i++){
+    const s=document.createElement("span");
+    s.textContent = i<=val ? "●":"○";
+    s.onclick=()=>{ save(el.dataset.key,i); renderDots(el,max,i); };
+    el.appendChild(s);
+  }
+}
+function save(k,v){ localStorage.setItem(k,v); }
+
+document.querySelectorAll(".dots").forEach(el=>{
+  const max=5;
+  const start = Number(localStorage.getItem(el.dataset.key)) ||
+    ({attr_body:4,attr_agl:2,attr_mind:5,attr_emp:3}[el.dataset.key]);
+  renderDots(el,max,start);
+});
+</script>
+
 </body>
 </html>
