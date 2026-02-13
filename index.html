@@ -3,241 +3,307 @@
 <head>
 <meta charset="UTF-8">
 <title>Чарлист — Адольф Грау</title>
+
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English&family=Spectral:wght@400;600&display=swap" rel="stylesheet">
+
 <style>
 body{
   margin:0;
-  background:#000;
-  color:#e5e5e5;
-  font-family:Segoe UI, sans-serif;
+  background:
+    radial-gradient(circle at 20% 20%, #1b1b1b, #0f0f0f 60%),
+    repeating-linear-gradient(45deg,#111,#111 10px,#0e0e0e 10px,#0e0e0e 20px);
+  font-family:"Spectral", serif;
+  color:#1a1a1a;
 }
-.wrap{max-width:1200px;margin:auto;padding:20px;}
-h1{text-align:center;letter-spacing:4px;text-transform:uppercase;margin-bottom:20px;}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;}
-.card{border:1px solid #333;border-radius:14px;padding:14px;background:#050505;box-shadow:0 0 20px rgba(255,255,255,.05);position:relative;}
-.label{
-    font-size:12px;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    color:#888;
-    margin-bottom:6px;
-    padding-bottom:4px;      /* Отступ под заголовком */
-    border-bottom:1px solid #222; /* Тонкая линия для отделения */
-}
-input,textarea{width:100%;background:#0b0b0b;border:1px solid #333;color:#eee;border-radius:8px;padding:8px;margin:4px 0;}
-button{background:#111;border:1px solid #444;color:#ccc;padding:8px;border-radius:8px;cursor:pointer;}
-button:hover{border-color:#aaa;color:#fff;}
-.dots{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px;}
-.dot{width:18px;height:18px;border-radius:50%;border:2px solid #666;background:#111;cursor:pointer;}
-.dot.active{background:#fff;border-color:#fff}
-.counter{font-size:11px;color:#666;margin-top:4px;margin-bottom:8px;}
-.item{position:relative;border:1px solid #333;border-radius:10px;padding:10px;margin-top:8px;background:#0a0a0a;}
-.del{position:absolute;right:8px;top:6px;color:#555;cursor:pointer;}
-.del:hover{color:#fff;}
-.moveBtn{font-size:12px;margin-top:6px;}
-#portraitBox{border:1px solid #333;border-radius:12px;height:260px;display:flex;align-items:center;justify-content:center;color:#444;cursor:pointer;overflow:hidden;margin-bottom:10px;background:#111;}
-#portraitBox:hover{border-color:#777;color:#777;}
-#portraitBox img{width:100%;height:100%;object-fit:contain;}
-.addBtn{position:absolute;top:10px;right:10px;width:24px;height:24px;border-radius:50%;border:none;font-size:18px;font-weight:bold;line-height:18px;text-align:center;cursor:pointer;color:#ccc;background:#111;}
-.addBtn:hover{color:#fff;}
-.addForm{display:none;margin-top:6px;}
-.addForm input, .addForm textarea{font-size:12px;padding:6px;}
-.addForm button{padding:4px 8px;font-size:12px;margin-top:4px;}
 
-/* Таланты с фиксированной высотой и скроллом */
-#talents {
-  max-height:300px;
-  overflow-y:auto;
-  margin-top:6px;
-  padding-right:4px;
+.page{
+  max-width:1100px;
+  margin:30px auto;
+  background:
+    linear-gradient(#efe6c9,#e4d7b3);
+  box-shadow:
+    0 0 0 2px #2a2a2a,
+    0 0 40px rgba(0,0,0,.7),
+    inset 0 0 120px rgba(0,0,0,.15);
+  padding:28px;
+  position:relative;
 }
-#talents::-webkit-scrollbar {width:6px;}
-#talents::-webkit-scrollbar-track {background:#111;}
-#talents::-webkit-scrollbar-thumb {background:#444;border-radius:3px;}
-#talents::-webkit-scrollbar-thumb:hover {background:#666;}
+
+.page:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(0,0,0,.03),
+      rgba(0,0,0,.03) 2px,
+      transparent 2px,
+      transparent 4px);
+  pointer-events:none;
+}
+
+h1{
+  margin:0 0 18px 0;
+  font-family:"IM Fell English", serif;
+  font-size:40px;
+  letter-spacing:1px;
+  border-bottom:3px double #2b2b2b;
+  padding-bottom:8px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:320px 1fr;
+  gap:18px;
+}
+
+.card{
+  background:#f6edd2;
+  border:1px solid #2b2b2b;
+  box-shadow:
+    inset 0 0 18px rgba(0,0,0,.12),
+    0 2px 6px rgba(0,0,0,.25);
+  padding:14px;
+  position:relative;
+}
+
+.label{
+  font-family:"IM Fell English", serif;
+  font-size:18px;
+  letter-spacing:.5px;
+  border-bottom:1px solid #333;
+  padding-bottom:4px;
+  margin-bottom:10px;
+}
+
+.section-gap{
+  margin-bottom:12px;
+}
+
+.namebox{
+  font-size:20px;
+  font-weight:600;
+  border:1px solid #333;
+  padding:6px;
+  background:#fffdf5;
+}
+
+.portrait{
+  width:100%;
+  height:420px;
+  border:2px solid #2b2b2b;
+  background:#000;
+  overflow:hidden;
+  box-shadow: inset 0 0 20px rgba(0,0,0,.5);
+}
+.portrait img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:#111;
+}
+
+.attr{
+  display:flex;
+  justify-content:space-between;
+  margin:6px 0;
+  font-size:16px;
+}
+
+.track{
+  letter-spacing:3px;
+  font-size:18px;
+}
+
+.skill{
+  display:flex;
+  justify-content:space-between;
+  border-bottom:1px dotted #777;
+  margin:4px 0;
+  padding-bottom:2px;
+  font-size:15px;
+}
+
+.item{
+  border:1px dashed #555;
+  background:#fffdf6;
+  padding:8px;
+  margin:8px 0;
+  box-shadow: inset 0 0 10px rgba(0,0,0,.08);
+}
+
+.item b{
+  font-size:15px;
+}
+
+.talent{
+  border-left:4px solid #333;
+  background:#fffdf6;
+  padding:8px 10px;
+  margin:8px 0;
+  box-shadow: inset 0 0 10px rgba(0,0,0,.08);
+}
+
+.small-btn{
+  border:1px solid #444;
+  background:#e8dcc0;
+  font-size:12px;
+  padding:2px 6px;
+  cursor:pointer;
+}
+.small-btn:hover{
+  background:#d9ccb0;
+}
+
+.corner-plus{
+  position:absolute;
+  top:6px;
+  right:8px;
+  font-size:16px;
+  cursor:pointer;
+  opacity:.55;
+}
+.corner-plus:hover{ opacity:1; }
+
+.delete{
+  float:right;
+  cursor:pointer;
+  opacity:.35;
+  font-size:13px;
+}
+.delete:hover{ opacity:.8; }
+
+a{ color:#222; }
+
+@media(max-width:900px){
+  .grid{ grid-template-columns:1fr; }
+}
 </style>
 </head>
+
 <body>
-<div class="wrap">
+<div class="page">
 <h1>Чарлист — Адольф Грау</h1>
 
 <div class="grid">
-<div class="card">
-<div class="label">Персонаж</div>
-<input id="charName" placeholder="Имя персонажа">
-<div id="portraitBox" onclick="imgInput.click()">Портрет</div>
-<input id="imgInput" type="file" accept="image/*" hidden>
+
+<!-- LEFT -->
+<div>
+
+<div class="card section-gap">
+<div class="label">Имя</div>
+<div class="namebox">Адольф Грау</div>
 </div>
 
-<div class="card">
+<div class="card section-gap">
+<div class="label">Портрет</div>
+<div class="portrait">
+<img src="https://i.pinimg.com/736x/31/31/be/3131be8cf94d75abe81a15f97e8c70dc.jpg">
+</div>
+</div>
+
+<div class="card section-gap">
 <div class="label">Характеристики</div>
-<div id="stats"></div>
+
+<div class="attr">Телосложение <span class="track">●●●●○ (4/5)</span></div>
+<div class="attr">Ловкость <span class="track">●●○○○ (2/5)</span></div>
+<div class="attr">Смекалка <span class="track">●●●●● (5/5)</span></div>
+<div class="attr">Эмпатия <span class="track">●●●○○ (3/5)</span></div>
+
 </div>
 
-<div class="card" id="talCard">
+</div>
+
+<!-- RIGHT -->
+<div>
+
+<div class="card section-gap">
+<div class="label">Телосложение — навыки</div>
+<div style="margin-bottom:6px;"></div>
+<div class="skill"><span>Выносливость</span><b>0</b></div>
+<div class="skill"><span>Драка</span><b>5</b></div>
+</div>
+
+<div class="card section-gap">
+<div class="label">Ловкость — навыки</div>
+<div style="margin-bottom:6px;"></div>
+<div class="skill"><span>Сила</span><b>0</b></div>
+<div class="skill"><span>Проворство</span><b>0</b></div>
+<div class="skill"><span>Скрытность</span><b>0</b></div>
+<div class="skill"><span>Стрельба</span><b>0</b></div>
+</div>
+
+<div class="card section-gap">
+<div class="label">Смекалка — навыки</div>
+<div style="margin-bottom:6px;"></div>
+<div class="skill"><span>Анализ</span><b>1</b></div>
+<div class="skill"><span>Знания</span><b>0</b></div>
+<div class="skill"><span>Наблюдательность</span><b>4</b></div>
+<div class="skill"><span>Ремесло</span><b>5</b></div>
+</div>
+
+<div class="card section-gap">
+<div class="label">Эмпатия — навыки</div>
+<div style="margin-bottom:6px;"></div>
+<div class="skill"><span>Влияние</span><b>0</b></div>
+<div class="skill"><span>Лечение</span><b>0</b></div>
+<div class="skill"><span>Проницательность</span><b>0</b></div>
+</div>
+
+<div class="card section-gap">
 <div class="label">Таланты</div>
-<button class="addBtn" onclick="toggleForm('talForm')">+</button>
-<div class="addForm" id="talForm"></div>
-<div id="talents"></div>
-</div>
+
+<div class="talent"><b>Изобретатель</b><br>
+При первом усовершенствовании предмета, персонаж не тратит компонент.</div>
+
+<div class="talent"><b>Ритуалистика</b><br>
+Вы владеете ритуальной магией. Доступен ритуал:
+<a href="https://docs.google.com/document/d/1TjCmSpLfW43ABwKMRuDI0SVO7V-yb8NkzwuFxlVsFq4/edit?usp=sharing" target="_blank">Займ у будущего</a>
 </div>
 
-<div class="grid">
-<div class="card"><div class="label">Телосложение — навыки</div><div id="s_body"></div></div>
-<div class="card"><div class="label">Ловкость — навыки</div><div id="s_agl"></div></div>
-<div class="card"><div class="label">Смекалка — навыки</div><div id="s_mind"></div></div>
-<div class="card"><div class="label">Эмпатия — навыки</div><div id="s_emp"></div></div>
-</div>
+<div class="talent"><b>Девять Жизней</b><br>
+Вы можете перекинуть кубы при броске на травму. Выбор травм опционален.</div>
 
-<div class="grid">
-<div class="card" id="invCard"><div class="label">Инвентарь</div><button class="addBtn" onclick="toggleForm('invForm')">+</button>
-<div class="addForm" id="invForm"></div>
-<div id="inventory"></div></div>
+<div class="talent"><b>Упорный</b><br>
+Вы можете пойти на Риск дважды.</div>
 
-<div class="card" id="stashCard"><div class="label">Склад</div><button class="addBtn" onclick="toggleForm('stashForm')">+</button>
-<div class="addForm" id="stashForm"></div>
-<div id="stash"></div></div>
-</div>
+<div class="talent"><b>Чугунный Козырь</b><br>
+Дополнительная управляемая рука. Может держать предметы, не чувствует боли.</div>
 
 </div>
 
-<script>
-const STORE_KEY="dark_sheet_final";
+<div class="card section-gap">
+<div class="label">Инвентарь</div>
 
-let STATE = {
-  name: "Адольф Грау",
-  portrait: "https://i.pinimg.com/736x/31/31/be/3131be8cf94d75abe81a15f97e8c70dc.jpg",
-  stats: {stat_body:4,stat_agl:2,stat_mind:5,stat_emp:3},
-  skills:{
-    skill_body_Сила:0, skill_body_Выносливость:0, skill_body_Драка:5,
-    skill_agl_Скрытность:0, skill_agl_Проворность:0, skill_agl_Стрельба:0,
-    skill_mind_Наблюдательность:4, skill_mind_Анализ:1, skill_mind_Знания:0, skill_mind_Ремесло:5,
-    skill_emp_Проницательность:0, skill_emp_Влияние:0, skill_emp_Лечение:0
-  },
-  talents:[
-    {n:"Изобретатель", d:"При первом усовершенствовании предмета, персонаж не тратит компонент."},
-    {n:"Ритуалистика", d:'Вы владеете ритуальной магией. Персонажу доступны следующие ритуалы: <a href="https://docs.google.com/document/d/1TjCmSpLfW43ABwKMRuDI0SVO7V-yb8NkzwuFxlVsFq4/edit?usp=sharing" target="_blank">*Займ у будущего*</a>'},
-    {n:"Девять Жизней", d:"Вы можете перекинуть кубы при броске на травму. Выбор выпавших травм опционален."},
-    {n:"Упорный", d:"Вы можете пойти на Риск дважды"},
-    {n:"Неуловимый", d:"Защита в бою считается маневром а не действием"},
-    {n:"Чугунный Козырь", d:"Вы создали себе еще одну конечность — руку, которая управляется вашей волей. Вы имеете возможность держать предметы в этой конечности. Конечность не обладает тактильностью, а ее ранение не причиняет вам боли."}
-  ],
-  inventory:[
-    {n:"Глефа", d:"Оружие. Двуручное. 2 прочности. 3 урона; дистанция ближняя; режущее; сбивающее; разоружающее; освященное."},
-    {n:"Кираса Смотрителей", d:"Доспех. 5 прочности. +3 к кубам против дьявольщины; освященное."},
-    {n:"Набор инструментов", d:"Снаряжение. 3 прочности. Прибавка к проверкам ремесла, равная прочности инструментов."},
-    {n:"Фонарь", d:"Снаряжение. ...А я думал, что вы заставите повесить мне на хуй электрический фонарь и работать в три смены (Анекдот про Брежнева)."},
-    {n:"Павеза", d:"Щит. Одноручное. 4 прочности. повышает требование успехов для проверок ловкости на 1, пока щит в руках; позволяет гарантированно защититься от 2 дробящего урона ценой 1 прочности: щита; снижает получаемый урон от атак, которые можно заблокировать, на 1."},
-    {n:"Музыкальный проигрыватель", d:"Безделушка/Артефакт. Маленькое устройство, способно проигрывать музыку на незнакомом языке, обладает функцией записи. В комплекте идут кассеты с записанной музыкой и пустые болванки. Устройство этого проигрывателя в корне отличается от любых других технических устройств Империи."}     
-  ],
-  stash:[
-    {n:"Легкий арбалет", d:"Оружие. Одноручное. 1 прочности. 2 урона; дистанция средняя; колющее; тихое; разрушающее; перезарядка."},      
-    {n:"Компонент", d:"Предмет крафта. 9 штук."},
-    {n:"Ящик с деталями", d:"Предмет крафта. Каждый ящик содержит достаточно крупное количество бракованных деталей. Чтобы получить из этого ящика хлама небольшое количество полезных деталей, понадобится бросок ремесла со сложностью 2. Из ящика получается максимум 1 компонент. Также каждый ящик требует очень большого времени, чтобы разобрать мусор. Имеет ограничение на один ящик в сцену."}
-  ]
-};
+<div class="item"><b>Глефа</b><br>
+Оружие. Двуручное. 2 прочности. 3 урона; ближняя; режущее; сбивающее; разоружающее; освященное.</div>
 
-function save(){localStorage.setItem(STORE_KEY,JSON.stringify(STATE))}
-function load(){const s=localStorage.getItem(STORE_KEY);if(s) STATE=JSON.parse(s)}
+<div class="item"><b>Кираса Смотрителей</b><br>
+Доспех. 5 прочности. +3 к кубам против дьявольщины; освященное.</div>
 
-function dotRow(container,key,max,stored={}){
-  let val=stored[key]||0;
-  const wrap=document.createElement("div");wrap.className="dots";
-  const counter=document.createElement("div");counter.className="counter";
-  function redraw(){
-    counter.textContent=val+"/"+max;
-    [...wrap.children].forEach((d,i)=>d.classList.toggle("active",i<val));
-    stored[key]=val; save();
-  }
-  for(let i=1;i<=max;i++){const d=document.createElement("div");d.className="dot";d.onclick=()=>{val=(val===i)?i-1:i; redraw();};wrap.appendChild(d);}
-  container.appendChild(wrap);
-  container.appendChild(counter);
-  redraw();
-}
+<div class="item"><b>Набор инструментов</b><br>
+3 прочности. Бонус к проверкам ремесла.</div>
 
-function statBlock(name,max,key){
-  const c=document.createElement("div");
-  const l=document.createElement("div");l.className="label";l.textContent=name;
-  c.appendChild(l);
-  dotRow(c,key,max,STATE.stats);
-  return c;
-}
+<div class="item"><b>Фонарь</b></div>
 
-const statsDiv=document.getElementById("stats");
-[["Телосложение",4,"stat_body"],["Смекалка",5,"stat_mind"],["Ловкость",2,"stat_agl"],["Эмпатия",3,"stat_emp"]].forEach(s=>statsDiv.appendChild(statBlock(s[0],s[1],s[2])));
+<div class="item"><b>Павеза</b></div>
 
-function skillSet(id,names,keyPrefix){
-  const root=document.getElementById(id);
-  names.forEach(n=>{
-    const c=document.createElement("div");
-    const l=document.createElement("div");l.className="label";l.textContent=n;c.appendChild(l);
-    dotRow(c,keyPrefix+n,5,STATE.skills);
-    root.appendChild(c);
-  });
-}
+<div class="item"><b>Музыкальный проигрыватель</b></div>
 
-skillSet("s_body",["Сила","Выносливость","Драка"],"skill_body_");
-skillSet("s_agl",["Скрытность","Проворность","Стрельба"],"skill_agl_");
-skillSet("s_mind",["Наблюдательность","Анализ","Знания","Ремесло"],"skill_mind_");
-skillSet("s_emp",["Проницательность","Влияние","Лечение"],"skill_emp_");
+</div>
 
-function drawPortrait(){
-  const box=document.getElementById("portraitBox");
-  box.innerHTML=STATE.portrait?"<img src='"+STATE.portrait+"'>":"Портрет";
-}
-const imgInput=document.getElementById("imgInput");
-imgInput.onchange=e=>{
-  const f=e.target.files[0];
-  const r=new FileReader();
-  r.onload=()=>{STATE.portrait=r.result;save();drawPortrait();};
-  r.readAsDataURL(f);
-};
+<div class="card">
+<div class="label">Склад</div>
 
-const charName=document.getElementById("charName");
-charName.value=STATE.name||"";
-charName.oninput=e=>{STATE.name=e.target.value;save();};
+<div class="item"><b>Легкий арбалет</b></div>
+<div class="item"><b>Компонент</b> — 9 шт.</div>
+<div class="item"><b>Ящик с деталями</b></div>
 
-function renderTalents(){
-  const box=document.getElementById("talents");box.innerHTML="";
-  STATE.talents.forEach((t,i)=>{
-    const d=document.createElement("div");d.className="item";
-    d.innerHTML="<div class='del'>✕</div><b>"+t.n+"</b><div>"+t.d+"</div>";
-    d.querySelector(".del").onclick=()=>{STATE.talents.splice(i,1);save();renderTalents();}
-    box.appendChild(d);
-  });
-}
+</div>
 
-function addItem(data,other,n,d){data.push({n,d});save(); renderAll();}
-function renderList(id,data,other){
-  const box=document.getElementById(id);box.innerHTML="";
-  data.forEach((it,i)=>{
-    const d=document.createElement("div");d.className="item";
-    d.innerHTML="<div class='del'>✕</div><b>"+it.n+"</b><div>"+it.d+"</div>";
-    d.querySelector(".del").onclick=()=>{data.splice(i,1);save();renderAll();}
-    if(other){const b=document.createElement("button");b.className="moveBtn";b.textContent="Переместить";b.onclick=()=>{other.push(it);data.splice(i,1);save();renderAll()};d.appendChild(b);}
-    box.appendChild(d);
-  });
-}
-
-function addControls(root,data,other){
-  const r=document.getElementById(root);
-  const n=document.createElement("input");n.placeholder="Название";
-  const d=document.createElement("textarea");d.placeholder="Описание";
-  const b=document.createElement("button");b.textContent="Добавить";
-  b.onclick=()=>{if(!n.value)return; addItem(data,other,n.value,d.value); n.value=""; d.value="";};
-  r.append(n,d,b);
-}
-
-function toggleForm(id){const f=document.getElementById(id);f.style.display=f.style.display==="block"?"none":"block";}
-function renderAll(){renderTalents();renderList("inventory",STATE.inventory,STATE.stash);renderList("stash",STATE.stash,STATE.inventory);drawPortrait();}
-
-addControls("invForm",STATE.inventory,STATE.stash);
-addControls("stashForm",STATE.stash,STATE.inventory);
-addControls("talForm",STATE.talents,null);
-
-load();
-charName.value=STATE.name||"";
-drawPortrait();
-renderAll();
-</script>
+</div>
+</div>
+</div>
 </body>
 </html>
