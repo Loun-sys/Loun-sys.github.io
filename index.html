@@ -9,16 +9,23 @@
 <style>
 body{
   margin:0;
-  background:#0f0f0f;
+  background:
+    radial-gradient(circle at 20% 20%, #1a1a1a, #0b0b0b 60%),
+    #0b0b0b;
   font-family:"Spectral", serif;
+  color:#111;
 }
 
 .page{
-  max-width:1100px;
-  margin:30px auto;
-  background:#e9ddbb;
-  padding:28px;
-  box-shadow:0 0 0 2px #222, 0 0 60px rgba(0,0,0,.8);
+  max-width:1150px;
+  margin:34px auto;
+  background:
+    linear-gradient(#efe6c8,#e4d6ad);
+  padding:30px;
+  box-shadow:
+    0 0 0 3px #111,
+    0 0 0 6px #3a3a3a,
+    0 30px 90px rgba(0,0,0,.9);
   position:relative;
 }
 
@@ -27,93 +34,129 @@ body{
   position:absolute; inset:0;
   pointer-events:none;
   background:
-    radial-gradient(circle at 10% 10%, rgba(0,0,0,.25), transparent 40%),
-    radial-gradient(circle at 90% 90%, rgba(0,0,0,.25), transparent 40%);
+    repeating-linear-gradient(
+      0deg,
+      rgba(0,0,0,.03),
+      rgba(0,0,0,.03) 2px,
+      transparent 2px,
+      transparent 4px
+    );
+  mix-blend-mode:multiply;
 }
 
 h1{
   font-family:"IM Fell English", serif;
-  font-size:40px;
-  margin:0 0 20px;
-  border-bottom:3px double #222;
+  font-size:44px;
+  margin:0 0 22px;
+  letter-spacing:1px;
+  border-bottom:4px double #111;
+  padding-bottom:8px;
 }
 
 .grid{
   display:grid;
-  grid-template-columns:320px 1fr;
-  gap:18px;
+  grid-template-columns:340px 1fr;
+  gap:20px;
 }
 
 .card{
-  background:#f4ecd2;
-  border:1px solid #222;
-  padding:14px;
-  box-shadow: inset 0 0 18px rgba(0,0,0,.12), 0 2px 6px rgba(0,0,0,.3);
+  background:#f6efd8;
+  border:1px solid #111;
+  padding:14px 16px;
+  box-shadow:
+    inset 0 0 22px rgba(0,0,0,.15),
+    inset 0 0 2px rgba(0,0,0,.6),
+    0 6px 14px rgba(0,0,0,.35);
+  position:relative;
+}
+
+.card:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.25);
 }
 
 .label{
   font-family:"IM Fell English", serif;
-  font-size:18px;
-  border-bottom:1px solid #333;
+  font-size:20px;
+  letter-spacing:.5px;
+  border-bottom:1px solid #222;
   margin-bottom:10px;
   padding-bottom:4px;
 }
 
 .namebox{
-  border:1px solid #333;
-  padding:6px;
-  background:#fffdf5;
+  border:1px solid #222;
+  padding:8px;
+  background:#fffdf4;
   font-weight:600;
+  font-size:18px;
+  box-shadow: inset 0 0 8px rgba(0,0,0,.15);
 }
 
 .portrait, .pet-portrait{
   width:100%;
-  height:420px;
-  border:2px solid #222;
+  border:2px solid #111;
   background:#111;
   display:flex;
   align-items:center;
   justify-content:center;
   cursor:pointer;
   overflow:hidden;
+  box-shadow: inset 0 0 18px rgba(0,0,0,.8);
 }
+
+.portrait{ height:430px; }
+.pet-portrait{ height:260px; }
 
 .portrait img, .pet-portrait img{
   width:100%;
   height:100%;
   object-fit:contain;
+  filter: contrast(1.05) saturate(.9);
 }
 
-.pet-portrait{ height:260px; }
+.dots{ margin:4px 0 10px; }
 
 .dots span{
   cursor:pointer;
-  font-size:20px;
-  letter-spacing:3px;
+  font-size:22px;
+  letter-spacing:4px;
+  transition:.15s;
+}
+
+.dots span:hover{
+  transform:scale(1.15);
 }
 
 .skill{
   display:flex;
   justify-content:space-between;
-  border-bottom:1px dotted #777;
-  margin:4px 0;
+  border-bottom:1px dotted #666;
+  margin:6px 0;
+  padding-bottom:2px;
+  font-size:15px;
 }
 
 .item, .talent{
-  border:1px dashed #555;
+  border:1px dashed #444;
   background:#fffdf6;
-  padding:8px;
-  margin:8px 0;
+  padding:10px;
+  margin:10px 0;
   font-size:14px;
+  box-shadow: inset 0 0 10px rgba(0,0,0,.08);
 }
 
 .talent{
-  border-left:4px solid #222;
+  border-left:6px solid #111;
+  background:linear-gradient(#fffdf6,#f3ead1);
 }
 
 .pet-text{
   font-size:14px;
-  line-height:1.4;
+  line-height:1.45;
   white-space:pre-line;
 }
 
@@ -167,25 +210,22 @@ h1{
 
 <div class="pet-text">
 <b>ВОРОН-ДУХОЛОВ</b>
-Мистическая тварь, выведенная и обученная Смотрителями Духов. Отличается костяными наростами-рогами вокруг глаз, позволяющими видеть волнения Призрачного Поля.
+Мистическая тварь, выведенная и обученная Смотрителями Духов. Отличается костяными наростами вокруг глаз, позволяющими видеть волнения Призрачного Поля.
 
 <b>Связь с владельцем:</b>
-Ворон неразлучен со Смотрителем, пребывает рядом, требует заботы.
+Всегда держится рядом и требует внимания.
 
 <b>Воронье Чутьё:</b>
-Чувствует насильственную смерть или разрыв Поля в пределах трёх районов и немедленно летит к эпицентру.
+Чувствует насильственную смерть и разрывы Поля в пределах трёх районов.
 
 <b>Фиксация:</b>
-1 ход фиксации события и возврат к хозяину.
+1 ход наблюдения и возврат.
 
 <b>Ведение к цели:</b>
-+3 к проверкам Наблюдательности по пути к источнику.
++3 к Наблюдательности по пути.
 
-<b>Долг и Принуждение:</b>
-Хозяин обязан устранить причину волнения Поля.
-
-<b>Если долг не исполнен:</b>
-Ворон мешает действиям, налагая помехи, пока угроза не устранена.
+<b>Принуждение:</b>
+Если долг не исполнен — мешает действиям хозяина.
 </div>
 </div>
 
@@ -210,7 +250,7 @@ h1{
 
 <div class="card">
 <div class="label">Смекалка — навыки</div>
-<div class="skill"><span>Анализ</span><b>1</b></div>
+<div class="skill"><span>Анализ</span><b>0</b></div>
 <div class="skill"><span>Знания</span><b>0</b></div>
 <div class="skill"><span>Наблюдательность</span><b>4</b></div>
 <div class="skill"><span>Ремесло</span><b>5</b></div>
@@ -218,31 +258,9 @@ h1{
 
 <div class="card">
 <div class="label">Эмпатия — навыки</div>
-<div class="skill"><span>Влияние</span><b>0</b></div>
+<div class="skill"><span>Влияние</span><b>1</b></div>
 <div class="skill"><span>Лечение</span><b>0</b></div>
 <div class="skill"><span>Проницательность</span><b>0</b></div>
-</div>
-
-<div class="card">
-<div class="label">Таланты</div>
-
-<div class="talent"><b>Изобретатель</b><br>
-При первом усовершенствовании предмета не тратится компонент.</div>
-
-<div class="talent"><b>Ритуалистика</b><br>
-Доступен ритуал:
-<a target="_blank" href="https://docs.google.com/document/d/1TjCmSpLfW43ABwKMRuDI0SVO7V-yb8NkzwuFxlVsFq4/edit?usp=sharing">
-Займ у будущего</a></div>
-
-<div class="talent"><b>Девять Жизней</b><br>
-Перекидывание кубов травмы.</div>
-
-<div class="talent"><b>Упорный</b><br>
-Риск дважды.</div>
-
-<div class="talent"><b>Чугунный Козырь</b><br>
-Дополнительная управляемая рука.</div>
-
 </div>
 
 <div class="card">
@@ -255,36 +273,13 @@ h1{
 Доспех. 5 прочности. +3 к кубам против дьявольщины; освященное.</div>
 
 <div class="item"><b>Набор инструментов</b><br>
-Снаряжение. 3 прочности. Прибавка к проверкам ремесла равная прочности.</div>
-
-<div class="item"><b>Фонарь</b><br>
-Снаряжение. Источник света.</div>
-
-<div class="item"><b>Павеза</b><br>
-Щит. 4 прочности. Блок урона и защита ловкости.</div>
-
-<div class="item"><b>Музыкальный проигрыватель</b><br>
-Артефакт. Проигрывание и запись музыки.</div>
+Снаряжение. 3 прочности. Прибавка к проверкам ремесла.</div>
 
 <div class="item"><b>Изысканный костюм</b><br>
-+2 к влиянию при взаимодействии с людьми. +1 к проворству и скрытности.</div>
++2 к влиянию. +1 к проворству и скрытности.</div>
 
 <div class="item"><b>Бронзовая Маска Смотрителя Духов</b><br>
-+2 куба против ментальных воздействий. Невозможно установить личность при стандартных проверках.</div>
-
-</div>
-
-<div class="card">
-<div class="label">Склад</div>
-
-<div class="item"><b>Легкий арбалет</b><br>
-1 прочность. 2 урона; средняя дистанция; тихое.</div>
-
-<div class="item"><b>Компоненты</b><br>
-9 штук.</div>
-
-<div class="item"><b>Ящик с деталями</b><br>
-Разбор дает 1 компонент при успехе ремесла.</div>
++2 куба против ментальных воздействий.</div>
 
 </div>
 
@@ -294,7 +289,7 @@ h1{
 
 <script>
 const DEFAULT_PORTRAIT = "https://i.pinimg.com/736x/31/31/be/3131be8cf94d75abe81a15f97e8c70dc.jpg";
-const DEFAULT_PET = "https://i.pinimg.com/736x/08/8d/ce/088dce1bfb08ec3b89cf94c347a4640a.jpg";
+const DEFAULT_PET = "https://i.pinimg.com/736x/72/52/56/72525624d779831b98791d318e44d998.jpg";
 
 function save(k,v){ localStorage.setItem(k,v); }
 
