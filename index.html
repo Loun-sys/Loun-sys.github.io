@@ -4,324 +4,576 @@
 <meta charset="UTF-8">
 <title>Чарлист — Адольф Грау</title>
 
-<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English&family=Spectral:wght@400;600&display=swap" rel="stylesheet">
-
 <style>
 body{
   margin:0;
   background:
-    radial-gradient(circle at 20% 20%, #1a1a1a, #0b0b0b 60%),
-    #0b0b0b;
-  font-family:"Spectral", serif;
-  color:#111;
+    radial-gradient(circle at 20% 10%, #1a1a1a, #000 60%),
+    #000;
+  color:#e8e8e8;
+  font-family: "Segoe UI", serif;
+  letter-spacing:.3px;
 }
 
-.page{
-  max-width:1150px;
-  margin:34px auto;
-  background:linear-gradient(#efe6c8,#e4d6ad);
-  padding:30px;
-  box-shadow:
-    0 0 0 3px #111,
-    0 0 0 6px #3a3a3a,
-    0 30px 90px rgba(0,0,0,.9);
-  position:relative;
-}
-
-.page:before{
-  content:"";
-  position:absolute; inset:0;
-  pointer-events:none;
-  background:repeating-linear-gradient(
-      0deg,
-      rgba(0,0,0,.03),
-      rgba(0,0,0,.03) 2px,
-      transparent 2px,
-      transparent 4px
-    );
-  mix-blend-mode:multiply;
+.wrapper{
+  max-width:1200px;
+  margin:30px auto;
+  padding:24px;
 }
 
 h1{
-  font-family:"IM Fell English", serif;
-  font-size:44px;
-  margin:0 0 22px;
-  letter-spacing:1px;
-  border-bottom:4px double #111;
-  padding-bottom:8px;
+  margin:0 0 20px 0;
+  font-weight:600;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  border-bottom:2px solid #333;
+  padding-bottom:10px;
 }
 
 .grid{
   display:grid;
-  grid-template-columns:340px 1fr;
-  gap:20px;
+  grid-template-columns: 420px 1fr;
+  gap:22px;
 }
 
 .card{
-  background:#f6efd8;
-  border:1px solid #111;
-  padding:14px 16px;
+  background:
+    linear-gradient(#111,#0a0a0a);
+  border:1px solid #2b2b2b;
+  border-radius:10px;
+  padding:14px;
   box-shadow:
-    inset 0 0 22px rgba(0,0,0,.15),
-    inset 0 0 2px rgba(0,0,0,.6),
-    0 6px 14px rgba(0,0,0,.35);
+    inset 0 0 25px #000,
+    0 0 18px rgba(0,0,0,.7);
   position:relative;
 }
 
-.card:after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.25);
-}
-
 .label{
-  font-family:"IM Fell English", serif;
-  font-size:20px;
-  letter-spacing:.5px;
-  border-bottom:1px solid #222;
-  margin-bottom:10px;
+  font-size:12px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:#8f8f8f;
+  margin-bottom:8px;
   padding-bottom:4px;
+  border-bottom:1px solid #222;
 }
 
 .namebox{
-  border:1px solid #222;
-  padding:8px;
-  background:#fffdf4;
-  font-weight:600;
-  font-size:18px;
-  box-shadow: inset 0 0 8px rgba(0,0,0,.15);
-}
-
-.portrait, .pet-portrait{
-  width:100%;
-  border:2px solid #111;
-  background:#111;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  overflow:hidden;
-  box-shadow: inset 0 0 18px rgba(0,0,0,.8);
-}
-
-.portrait{ height:430px; }
-.pet-portrait{ height:260px; }
-
-.portrait img, .pet-portrait img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  filter: contrast(1.05) saturate(.9);
-}
-
-.dots{ margin:4px 0 10px; }
-
-.dots span{
-  cursor:pointer;
   font-size:22px;
-  letter-spacing:4px;
-  transition:.15s;
-}
-
-.dots span:hover{
-  transform:scale(1.15);
-}
-
-.skill{
-  display:flex;
-  justify-content:space-between;
-  border-bottom:1px dotted #666;
-  margin:6px 0;
-  padding-bottom:2px;
-  font-size:15px;
-}
-
-.item, .talent{
-  border:1px dashed #444;
-  background:#fffdf6;
   padding:10px;
-  margin:10px 0;
-  font-size:14px;
-  box-shadow: inset 0 0 10px rgba(0,0,0,.08);
+  background:#050505;
+  border:1px solid #2a2a2a;
+  border-radius:6px;
+  text-align:center;
 }
 
-.talent{
-  border-left:6px solid #111;
-  background:linear-gradient(#fffdf6,#f3ead1);
+/* портрет */
+
+.portrait{
+  width:100%;
+  height:520px;
+  object-fit:contain;
+  background:#000;
+  border:1px solid #333;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+/* питомец */
+
+.pet-portrait{
+  width:100%;
+  height:240px;
+  object-fit:contain;
+  background:#000;
+  border:1px solid #333;
+  border-radius:8px;
+  cursor:pointer;
+  margin-bottom:10px;
 }
 
 .pet-text{
-  font-size:14px;
+  font-size:13px;
   line-height:1.45;
-  white-space:pre-line;
+  color:#cfcfcf;
+  white-space:pre-wrap;
 }
 
-@media(max-width:900px){
-  .grid{ grid-template-columns:1fr; }
+/* точки */
+
+.dots{
+  display:flex;
+  gap:6px;
+  margin-bottom:10px;
+}
+
+.dot{
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  border:1px solid #555;
+  cursor:pointer;
+  transition:.15s;
+  background:#0a0a0a;
+}
+
+.dot:hover{
+  transform:scale(1.15);
+  border-color:#aaa;
+}
+
+.dot.on{
+  background:#e6e6e6;
+  box-shadow:0 0 6px #fff;
+}
+
+/* списки */
+
+.item{
+  border:1px solid #242424;
+  padding:8px;
+  border-radius:6px;
+  margin-bottom:8px;
+  background:#070707;
+}
+
+.item b{
+  letter-spacing:1px;
+}
+
+.item p{
+  margin:4px 0 0 0;
+  font-size:13px;
+  color:#bdbdbd;
+}
+
+.scroll{
+  max-height:260px;
+  overflow:auto;
+  padding-right:6px;
+}
+
+/* кнопки */
+
+.add-mini{
+  position:absolute;
+  top:8px;
+  right:10px;
+  background:#111;
+  border:1px solid #333;
+  color:#aaa;
+  border-radius:50%;
+  width:22px;
+  height:22px;
+  cursor:pointer;
+}
+
+.add-mini:hover{
+  color:#fff;
+  border-color:#777;
+}
+
+.xbtn{
+  float:right;
+  cursor:pointer;
+  opacity:.35;
+}
+
+.xbtn:hover{
+  opacity:.9;
+}
+
+.movebtn{
+  font-size:11px;
+  opacity:.5;
+  cursor:pointer;
+}
+
+.movebtn:hover{
+  opacity:1;
 }
 </style>
 </head>
 
 <body>
-<div class="page">
+<div class="wrapper">
+
 <h1>Чарлист — Адольф Грау</h1>
 
 <div class="grid">
 
-<!-- LEFT -->
+<!-- ЛЕВАЯ КОЛОНКА -->
+
 <div>
 
 <div class="card">
-<div class="label">Имя</div>
-<div class="namebox">Адольф Грау</div>
+  <div class="label">Имя</div>
+  <div class="namebox">Адольф Грау</div>
 </div>
 
 <div class="card">
-<div class="label">Портрет</div>
-<div id="portraitBox" class="portrait"></div>
-<input type="file" id="portraitInput" hidden accept="image/*">
+  <div class="label">Портрет</div>
+  <img id="portrait"
+  class="portrait"
+  src="https://i.pinimg.com/736x/31/31/be/3131be8cf94d75abe81a15f97e8c70dc.jpg">
 </div>
 
 <div class="card">
-<div class="label">Характеристики</div>
+  <div class="label">Питомец — Ворон-Духолов</div>
 
-<div>Телосложение
-<div class="dots" data-key="attr_body"></div></div>
+  <img id="petPortrait"
+  class="pet-portrait"
+  src="https://i.pinimg.com/736x/72/52/56/72525624d779831b98791d318e44d998.jpg">
 
-<div>Ловкость
-<div class="dots" data-key="attr_agl"></div></div>
+  <div class="pet-text">
+ВОРОН-ДУХОЛОВ
 
-<div>Смекалка
-<div class="dots" data-key="attr_mind"></div></div>
+Мистическая тварь, выведенная и обученная Смотрителями Духов. Отличается костяными наростами вокруг глаз, позволяющими чувствовать возмущения Призрачного Поля.
 
-<div>Эмпатия
-<div class="dots" data-key="attr_emp"></div></div>
+Связь с владельцем:
+Неразлучен со своим Смотрителем. Требует заботы.
 
-</div>
+Воронье Чутьё:
+Чует неестественную смерть и разрывы поля в пределах 3 районов.
 
-<div class="card">
-<div class="label">Питомец</div>
-<div id="petBox" class="pet-portrait"></div>
-<input type="file" id="petInput" hidden accept="image/*">
+Бонус: +3 к наблюдательности по пути к цели.
 
-<div class="pet-text">
-<b>ВОРОН-ДУХОЛОВ</b>
-Мистическая тварь, выведенная и обученная Смотрителями Духов. Отличается костяными наростами вокруг глаз, позволяющими видеть волнения Призрачного Поля.
-
-Связь с владельцем — всегда рядом.
-Воронье чутьё — чувствует разрывы и смерти.
-Ведение — даёт +3 к Наблюдательности.
-Неисполненный долг — мешает действиям.
-</div>
+Долг:
+Если событие не устранено — мешает хозяину и накладывает помехи.
+  </div>
 </div>
 
 </div>
-
-<!-- RIGHT -->
+<!-- ПРАВАЯ КОЛОНКА -->
 <div>
 
-<div class="card">
-<div class="label">Телосложение — навыки</div>
-<div class="skill"><span>Выносливость</span><b>0</b></div>
-<div class="skill"><span>Драка</span><b>5</b></div>
-<div class="skill"><span>Сила</span><b>0</b></div>
-</div>
+<!-- ХАРАКТЕРИСТИКИ -->
 
 <div class="card">
-<div class="label">Ловкость — навыки</div>
-<div class="skill"><span>Проворство</span><b>0</b></div>
-<div class="skill"><span>Скрытность</span><b>0</b></div>
-<div class="skill"><span>Стрельба</span><b>0</b></div>
+  <div class="label">Телосложение — максимум 4</div>
+  <div class="dots" data-key="body" data-max="5"></div>
 </div>
 
 <div class="card">
-<div class="label">Смекалка — навыки</div>
-<div class="skill"><span>Анализ</span><b>0</b></div>
-<div class="skill"><span>Знания</span><b>0</b></div>
-<div class="skill"><span>Наблюдательность</span><b>4</b></div>
-<div class="skill"><span>Ремесло</span><b>5</b></div>
+  <div class="label">Ловкость — максимум 2</div>
+  <div class="dots" data-key="agl" data-max="5"></div>
 </div>
 
 <div class="card">
-<div class="label">Эмпатия — навыки</div>
-<div class="skill"><span>Влияние</span><b>1</b></div>
-<div class="skill"><span>Лечение</span><b>0</b></div>
-<div class="skill"><span>Проницательность</span><b>0</b></div>
+  <div class="label">Смекалка — максимум 5</div>
+  <div class="dots" data-key="mind" data-max="5"></div>
 </div>
 
 <div class="card">
-<div class="label">Инвентарь</div>
+  <div class="label">Эмпатия — максимум 3</div>
+  <div class="dots" data-key="emp" data-max="5"></div>
+</div>
 
-<div class="item"><b>Глефа</b><br>Оружие. 3 урона.</div>
-<div class="item"><b>Кираса Смотрителей</b><br>5 прочности. +3 против дьявольщины.</div>
-<div class="item"><b>Набор инструментов</b><br>Бонус к ремеслу.</div>
-<div class="item"><b>Изысканный костюм</b><br>+2 влияние, +1 скрытность.</div>
-<div class="item"><b>Бронзовая Маска Смотрителя Духов</b><br>+2 ментальная защита.</div>
 
+<!-- НАВЫКИ -->
+
+<div class="card">
+  <div class="label">Телосложение — навыки</div>
+  <div id="s_body"></div>
 </div>
 
 <div class="card">
-<div class="label">Склад</div>
-
-<div class="item"><b>Легкий арбалет</b><br>2 урона, средняя дистанция.</div>
-<div class="item"><b>Компоненты</b><br>9 штук.</div>
-<div class="item"><b>Ящик с деталями</b><br>Можно разобрать на компонент.</div>
-
+  <div class="label">Ловкость — навыки</div>
+  <div id="s_agl"></div>
 </div>
 
+<div class="card">
+  <div class="label">Смекалка — навыки</div>
+  <div id="s_mind"></div>
 </div>
+
+<div class="card">
+  <div class="label">Эмпатия — навыки</div>
+  <div id="s_emp"></div>
 </div>
+
+
+<!-- ТАЛАНТЫ -->
+
+<div class="card">
+  <div class="label">Таланты</div>
+  <div id="talents" class="scroll"></div>
+  <button class="add-mini" onclick="addTalent()">＋</button>
 </div>
+
+</div> <!-- конец правой колонки -->
+</div> <!-- конец grid -->
 
 <script>
-const DEFAULT_PORTRAIT = "https://i.pinimg.com/736x/31/31/be/3131be8cf94d75abe81a15f97e8c70dc.jpg";
-const DEFAULT_PET = "https://i.pinimg.com/736x/72/52/56/72525624d779831b98791d318e44d998.jpg";
 
-function save(k,v){ localStorage.setItem(k,v); }
+/* ====== СОСТОЯНИЕ ====== */
 
-function renderDots(el, max, val){
-  el.innerHTML="";
-  for(let i=1;i<=max;i++){
-    const s=document.createElement("span");
-    s.textContent = i<=val ? "●":"○";
-    s.onclick=()=>{ save(el.dataset.key,i); renderDots(el,max,i); };
-    el.appendChild(s);
-  }
+const STATE = JSON.parse(localStorage.getItem("sheet")||"{}");
+
+/* значения по умолчанию */
+
+const DEFAULT = {
+ body:4,
+ agl:2,
+ mind:5,
+ emp:3,
+
+ skills:{
+  body:{Сила:0,Выносливость:0,Драка:5},
+  agl:{Проворство:0,Скрытность:0,Стрельба:0},
+  mind:{Анализ:0,Знания:0,Наблюдательность:4,Ремесло:5},
+  emp:{Влияние:1,Лечение:0,Проницательность:0}
+ },
+
+ talents:[
+  {n:"Изобретатель", d:"При первом усовершенствовании предмета не тратится компонент."},
+  {n:"Ритуалистика", d:'Доступен ритуал: <a href="https://docs.google.com/document/d/1TjCmSpLfW43ABwKMRuDI0SVO7V-yb8NkzwuFxlVsFq4/edit?usp=sharing" target="_blank">Займ у будущего</a>'},
+  {n:"Девять Жизней", d:"Можно перекинуть кубы при травме."},
+  {n:"Упорный", d:"Можно пойти на Риск дважды."},
+  {n:"Чугунный Козырь", d:"Дополнительная механическая рука."}
+ ]
+};
+
+function save(){
+ localStorage.setItem("sheet", JSON.stringify(STATE));
 }
 
-function drawImg(boxId,key,def){
-  const box=document.getElementById(boxId);
-  const src=localStorage.getItem(key)||def;
-  box.innerHTML="<img src='"+src+"'>";
-}
+/* ====== ТОЧКИ ====== */
 
-function hookImage(boxId,inputId,key,def){
-  drawImg(boxId,key,def);
-  document.getElementById(boxId).onclick=()=>document.getElementById(inputId).click();
-  document.getElementById(inputId).onchange=e=>{
-    const r=new FileReader();
-    r.onload=()=>{ save(key,r.result); drawImg(boxId,key,def); };
-    r.readAsDataURL(e.target.files[0]);
+function drawDots(el, key, max){
+ let val = STATE[key] ?? DEFAULT[key];
+ el.innerHTML="";
+ for(let i=1;i<=max;i++){
+  const d=document.createElement("div");
+  d.className="dot"+(i<=val?" on":"");
+  d.onclick=()=>{
+    STATE[key]=i;
+    save();
+    drawDots(el,key,max);
   };
+  el.appendChild(d);
+ }
 }
 
-hookImage("portraitBox","portraitInput","portrait",DEFAULT_PORTRAIT);
-hookImage("petBox","petInput","petPortrait",DEFAULT_PET);
+/* ===== НАВЫКИ ===== */
 
-document.querySelectorAll(".dots").forEach(el=>{
-  const max=5;
-  const start = Number(localStorage.getItem(el.dataset.key)) ||
-    ({attr_body:4,attr_agl:2,attr_mind:5,attr_emp:3}[el.dataset.key]);
-  renderDots(el,max,start);
+function drawSkills(root, group){
+ const data = {...DEFAULT.skills[group], ...(STATE.skills?.[group]||{})};
+ STATE.skills ||= {};
+ STATE.skills[group] ||= {};
+
+ root.innerHTML="";
+
+ Object.entries(data).forEach(([name,val])=>{
+  const row=document.createElement("div");
+  row.innerHTML = `<div class="label" style="border:none;margin:6px 0 2px">${name}</div>`;
+  const box=document.createElement("div");
+  box.className="dots";
+
+  for(let i=1;i<=5;i++){
+    const d=document.createElement("div");
+    d.className="dot"+(i<=val?" on":"");
+    d.onclick=()=>{
+      STATE.skills[group][name]=i;
+      save();
+      drawSkills(root,group);
+    };
+    box.appendChild(d);
+  }
+
+  row.appendChild(box);
+  root.appendChild(row);
+ });
+}
+
+/* ===== ТАЛАНТЫ ===== */
+
+function renderTalents(){
+ const wrap = document.getElementById("talents");
+ const arr = STATE.talents || DEFAULT.talents;
+ wrap.innerHTML="";
+
+ arr.forEach((t,i)=>{
+  const div=document.createElement("div");
+  div.className="item";
+  div.innerHTML = `<span class="xbtn" onclick="delTalent(${i})">✕</span><b>${t.n}</b><p>${t.d}</p>`;
+  wrap.appendChild(div);
+ });
+}
+
+function addTalent(){
+ const n=prompt("Название таланта:");
+ if(!n) return;
+ const d=prompt("Описание:");
+ STATE.talents ||= [];
+ STATE.talents.push({n,d});
+ save();
+ renderTalents();
+}
+
+function delTalent(i){
+ STATE.talents.splice(i,1);
+ save();
+ renderTalents();
+}
+
+/* ===== ИНИЦИАЛИЗАЦИЯ ===== */
+
+document.querySelectorAll(".dots[data-key]").forEach(el=>{
+ drawDots(el, el.dataset.key, +el.dataset.max);
 });
+
+drawSkills(document.getElementById("s_body"),"body");
+drawSkills(document.getElementById("s_agl"),"agl");
+drawSkills(document.getElementById("s_mind"),"mind");
+drawSkills(document.getElementById("s_emp"),"emp");
+
+renderTalents();
+
+</script>
+<!-- ИНВЕНТАРЬ И СКЛАД -->
+
+<div class="grid" style="margin-top:22px">
+
+<div class="card">
+  <div class="label">Инвентарь</div>
+  <div id="inv" class="scroll"></div>
+  <button class="add-mini" onclick="addItem('inv')">＋</button>
+</div>
+
+<div class="card">
+  <div class="label">Склад</div>
+  <div id="stash" class="scroll"></div>
+  <button class="add-mini" onclick="addItem('stash')">＋</button>
+</div>
+
+</div>
+
+
+<script>
+
+/* ===== ПРЕДМЕТЫ ПО УМОЛЧАНИЮ ===== */
+
+const DEFAULT_INV = [
+ {n:"Глефа", d:"Оружие. Двуручное. 2 прочности. 3 урона; ближняя; режущее; сбивающее; разоружающее; освященное."},
+
+ {n:"Кираса Смотрителей", d:"Доспех. 5 прочности. +3 к кубам против дьявольщины; освященное."},
+
+ {n:"Набор инструментов", d:"Снаряжение. 3 прочности. Прибавка к проверкам ремесла равна прочности."},
+
+ {n:"Фонарь", d:"Снаряжение. ...А я думал, что вы заставите повесить мне на хуй электрический фонарь и работать в три смены."},
+
+ {n:"Павеза", d:"Щит. Одноручное. 4 прочности. +1 сложность ловкости пока в руках; блок 2 дробящего за 1 прочности."},
+
+ {n:"Музыкальный проигрыватель", d:"Артефакт. Проигрывает и записывает музыку на неизвестном языке."},
+
+ {n:"Изысканный костюм", d:"+2 к влиянию при взаимодействии с людьми. +1 к проворству и скрытности."},
+
+ {n:"Бронзовая Маска Смотрителя Духов", d:"+2 куба против ментальных воздействий. Личность невозможно установить обычными проверками."}
+];
+
+const DEFAULT_STASH = [
+ {n:"Легкий арбалет", d:"Оружие. Одноручное. 1 прочности. 2 урона; средняя; тихое; перезарядка."},
+
+ {n:"Компонент", d:"Предмет крафта. 9 штук."},
+
+ {n:"Ящик с деталями", d:"Хлам для разбора. Проверка ремесла сложность 2 → 1 компонент."}
+];
+
+/* ===== СОСТОЯНИЕ ===== */
+
+STATE.inv ||= DEFAULT_INV.slice();
+STATE.stash ||= DEFAULT_STASH.slice();
+
+/* ===== РЕНДЕР ===== */
+
+function renderList(key, id){
+ const wrap = document.getElementById(id);
+ wrap.innerHTML="";
+
+ STATE[key].forEach((it,i)=>{
+  const div=document.createElement("div");
+  div.className="item";
+
+  const moveTo = key==="inv" ? "stash" : "inv";
+  const arrow = key==="inv" ? "⇢ склад" : "⇠ инв.";
+
+  div.innerHTML =
+   `<span class="xbtn" onclick="delItem('${key}',${i})">✕</span>
+    <b>${it.n}</b>
+    <p>${it.d||""}</p>
+    <div class="movebtn" onclick="moveItem('${key}',${i})">${arrow}</div>`;
+
+  wrap.appendChild(div);
+ });
+}
+
+/* ===== ОПЕРАЦИИ ===== */
+
+function addItem(key){
+ const n = prompt("Название предмета:");
+ if(!n) return;
+ const d = prompt("Описание:");
+ STATE[key].push({n,d});
+ save();
+ renderAllLists();
+}
+
+function delItem(key,i){
+ STATE[key].splice(i,1);
+ save();
+ renderAllLists();
+}
+
+function moveItem(from,i){
+ const to = from==="inv" ? "stash" : "inv";
+ const it = STATE[from].splice(i,1)[0];
+ STATE[to].push(it);
+ save();
+ renderAllLists();
+}
+
+function renderAllLists(){
+ renderList("inv","inv");
+ renderList("stash","stash");
+}
+
+/* ===== ПЕРВЫЙ РЕНДЕР ===== */
+
+renderAllLists();
+
+/* ===== СОХРАНЕНИЕ ПОРТРЕТОВ ===== */
+
+portrait.onclick = async ()=>{
+ const f = await pickFile();
+ if(!f) return;
+ const r = new FileReader();
+ r.onload = ()=>{ portrait.src=r.result; STATE.portrait=r.result; save(); };
+ r.readAsDataURL(f);
+};
+
+petPortrait.onclick = async ()=>{
+ const f = await pickFile();
+ if(!f) return;
+ const r = new FileReader();
+ r.onload = ()=>{ petPortrait.src=r.result; STATE.pet=r.result; save(); };
+ r.readAsDataURL(f);
+};
+
+if(STATE.portrait) portrait.src = STATE.portrait;
+if(STATE.pet) petPortrait.src = STATE.pet;
+
+function pickFile(){
+ return new Promise(res=>{
+  const i=document.createElement("input");
+  i.type="file";
+  i.accept="image/*";
+  i.onchange=()=>res(i.files[0]);
+  i.click();
+ });
+}
+
 </script>
 
-    <div class="card">
-      <div class="label">Таланты</div>
-      <div id="talents" class="scroll"></div>
-      <button class="add-mini" onclick="addTalent()">＋</button>
-    </div>
 </body>
 </html>
