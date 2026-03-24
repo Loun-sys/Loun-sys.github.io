@@ -7,118 +7,109 @@
 <style>
 body{
   margin:0;
-  background:#0b0b0b;
-  color:#e0e0e0;
-  font-family:"Segoe UI", serif;
+  background:
+    radial-gradient(circle at 20% 10%, #1a1a1a, #000 60%),
+    #000;
+  color:#e8e8e8;
+  font-family: "Segoe UI", serif;
   letter-spacing:.3px;
 }
 
 .wrapper{
-  max-width:1250px;
+  max-width:1200px;
   margin:30px auto;
   padding:24px;
 }
 
 h1{
-  margin:0 0 24px 0;
-  font-weight:700;
-  letter-spacing:4px;
+  margin:0 0 20px 0;
+  font-weight:600;
+  letter-spacing:3px;
   text-transform:uppercase;
   border-bottom:2px solid #333;
-  padding-bottom:12px;
-  color:#f5f5f5;
+  padding-bottom:10px;
 }
 
 .grid{
   display:grid;
-  grid-template-columns:440px 1fr;
-  gap:26px;
+  grid-template-columns: 420px 1fr;
+  gap:22px;
 }
 
-/* карточки */
 .card{
-  background:linear-gradient(145deg,#111,#0a0a0a);
-  border:2px solid #2e2e2e;
-  border-radius:12px;
-  padding:16px;
+  background:
+    linear-gradient(#111,#0a0a0a);
+  border:1px solid #2b2b2b;
+  border-radius:10px;
+  padding:14px;
   box-shadow:
     inset 0 0 25px #000,
-    0 0 20px rgba(0,0,0,.7);
+    0 0 18px rgba(0,0,0,.7);
   position:relative;
-  transition:.2s;
 }
 
-.card:hover{
-  box-shadow:
-    inset 0 0 25px #000,
-    0 0 25px rgba(255,255,255,.05);
-}
-
-/* заголовки */
 .label{
-  font-size:13px;
+  font-size:12px;
   letter-spacing:2px;
   text-transform:uppercase;
-  color:#a0a0a0;
-  margin-bottom:10px;
+  color:#8f8f8f;
+  margin-bottom:8px;
   padding-bottom:4px;
   border-bottom:1px solid #222;
 }
 
-/* имя персонажа */
 .namebox{
-  font-size:24px;
-  padding:12px;
+  font-size:22px;
+  padding:10px;
   background:#050505;
   border:1px solid #2a2a2a;
-  border-radius:8px;
+  border-radius:6px;
   text-align:center;
-  font-weight:600;
-  letter-spacing:1.5px;
 }
 
 /* портрет */
+
 .portrait{
   width:100%;
-  height:540px;
+  height:520px;
   object-fit:contain;
   background:#000;
-  border:2px solid #333;
-  border-radius:10px;
+  border:1px solid #333;
+  border-radius:8px;
   cursor:pointer;
-  box-shadow:0 0 15px #000 inset;
 }
 
 /* питомец */
+
 .pet-portrait{
   width:100%;
-  height:260px;
+  height:240px;
   object-fit:contain;
   background:#000;
-  border:2px solid #333;
-  border-radius:10px;
+  border:1px solid #333;
+  border-radius:8px;
   cursor:pointer;
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
 
 .pet-text{
   font-size:13px;
-  line-height:1.5;
+  line-height:1.45;
   color:#cfcfcf;
   white-space:pre-wrap;
-  margin-top:4px;
 }
 
-/* точки характеристики */
+/* точки */
+
 .dots{
   display:flex;
   gap:6px;
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
 
 .dot{
-  width:20px;
-  height:20px;
+  width:18px;
+  height:18px;
   border-radius:50%;
   border:1px solid #555;
   cursor:pointer;
@@ -132,23 +123,18 @@ h1{
 }
 
 .dot.on{
-  background:#e8e8e8;
+  background:#e6e6e6;
   box-shadow:0 0 6px #fff;
 }
 
-/* списки и карточки внутри */
+/* списки */
+
 .item{
   border:1px solid #242424;
-  padding:10px;
-  border-radius:8px;
-  margin-bottom:10px;
+  padding:8px;
+  border-radius:6px;
+  margin-bottom:8px;
   background:#070707;
-  transition:.2s;
-}
-
-.item:hover{
-  border-color:#555;
-  box-shadow:0 0 8px #000 inset;
 }
 
 .item b{
@@ -156,33 +142,30 @@ h1{
 }
 
 .item p{
-  margin:6px 0 0 0;
+  margin:4px 0 0 0;
   font-size:13px;
   color:#bdbdbd;
 }
 
-/* прокрутка */
 .scroll{
-  max-height:270px;
+  max-height:260px;
   overflow:auto;
   padding-right:6px;
 }
 
-/* кнопки добавить/удалить */
+/* кнопки */
+
 .add-mini{
   position:absolute;
-  top:10px;
-  right:12px;
+  top:8px;
+  right:10px;
   background:#111;
   border:1px solid #333;
   color:#aaa;
   border-radius:50%;
-  width:24px;
-  height:24px;
+  width:22px;
+  height:22px;
   cursor:pointer;
-  font-weight:700;
-  line-height:20px;
-  text-align:center;
 }
 
 .add-mini:hover{
@@ -194,7 +177,6 @@ h1{
   float:right;
   cursor:pointer;
   opacity:.35;
-  font-weight:700;
 }
 
 .xbtn:hover{
@@ -202,16 +184,14 @@ h1{
 }
 
 .movebtn{
-  font-size:12px;
+  font-size:11px;
   opacity:.5;
   cursor:pointer;
-  margin-top:4px;
 }
 
 .movebtn:hover{
   opacity:1;
 }
-
 </style>
 </head>
 
@@ -251,40 +231,44 @@ h1{
 Мистическая тварь, выведенная и обученная Смотрителями Духов. Отличается костяными наростами вокруг глаз, позволяющими чувствовать возмущения Призрачного Поля.
 
 Связь с владельцем:
-Неразлучен со своим Смотрителем. Требует заботы.
+Ворон неразлучен со своим Смотрителем, напоминая ему о его долге. Он пребывает в непосредственной близости с хозяином и в большинстве своём неприхотлив, но, как и любое животное, требует заботы и ласки.
 
 Воронье Чутьё:
-Чует неестественную смерть и разрывы поля в пределах 3 районов.
+Если в пределах трёх смежных районов от текущего местоположения Ворона происходит неестественная или насильственная смерть, либо возникает масштабный разрыв в Призрачном Поле, существо немедленно сорвётся с места и устремится к эпицентру события. Время в пути: 1-а минута или 1-н ход (на усмотрение ГМа, ведущего слух/ситуацию, в зависимости от расстояния и препятствий).
 
-Бонус: +3 к наблюдательности по пути к цели.
+Фиксация: Достигнув цели, Ворон в течение 1-го хода фиксирует событие, после чего столь же быстро возвращается к хозяину. Бонус наблюдательности: На пути к цели Смотритель получает +3 к проверкам Наблюдательности (для обнаружения ловушек, оптимальных маршрутов, скрытых подходов или аномалий, отмеченных Вороном).
+
 
 Долг:
-Если событие не устранено — мешает хозяину и накладывает помехи.
+Если событие не устранено — мешает хозяину и накладывает помехи. Ворон начинает отвлекать хозяина: каркать, рвать плащ, бить крыльями, налагая помеху на все броски Смотрителя, лишая его манёвра, а то и действия в особо патовых ситуациях, и привлекая внимание. Ворон отказывается помогать до тех пор, пока угроза не будет устранена.
+
+
   </div>
 </div>
 
-  <!-- ПРАВАЯ КОЛОНКА -->
+</div>
+<!-- ПРАВАЯ КОЛОНКА -->
 <div>
 
 <!-- ХАРАКТЕРИСТИКИ -->
 
 <div class="card">
-  <div class="label">Телосложение — максимум 4</div>
+  <div class="label">Телосложение</div>
   <div class="dots" data-key="body" data-max="5"></div>
 </div>
 
 <div class="card">
-  <div class="label">Ловкость — максимум 2</div>
+  <div class="label">Ловкость</div>
   <div class="dots" data-key="agl" data-max="5"></div>
 </div>
 
 <div class="card">
-  <div class="label">Смекалка — максимум 5</div>
+  <div class="label">Смекалка</div>
   <div class="dots" data-key="mind" data-max="5"></div>
 </div>
 
 <div class="card">
-  <div class="label">Эмпатия — максимум 3</div>
+  <div class="label">Эмпатия</div>
   <div class="dots" data-key="emp" data-max="5"></div>
 </div>
 
@@ -340,8 +324,8 @@ const DEFAULT = {
  skills:{
   body:{Сила:0,Выносливость:0,Драка:5},
   agl:{Проворство:0,Скрытность:0,Стрельба:0},
-  mind:{Анализ:0,Знания:0,Наблюдательность:4,Ремесло:5},
-  emp:{Влияние:1,Лечение:0,Проницательность:0}
+  mind:{Анализ:1,Знания:0,Наблюдательность:5,Ремесло:5},
+  emp:{Влияние:0,Лечение:0,Проницательность:0}
  },
 
  talents:[
@@ -349,8 +333,8 @@ const DEFAULT = {
   {n:"Ритуалистика", d:'Доступен ритуал: <a href="https://docs.google.com/document/d/1TjCmSpLfW43ABwKMRuDI0SVO7V-yb8NkzwuFxlVsFq4/edit?usp=sharing" target="_blank">Займ у будущего</a>'},
   {n:"Девять Жизней", d:"Можно перекинуть кубы при травме."},
   {n:"Упорный", d:"Можно пойти на Риск дважды."},
-  {n:"Чугунный Козырь", d:"Дополнительная механическая рука."},
-  {n:"Неуловимый", d:"Позволяет защищаться маневром."}
+  {n:"Чугунный Козырь", d:"Дополнительная механическая рука."}  
+  {n:"Неуловимый", d:"Защита от маневра."},
  ]
 };
 
@@ -451,8 +435,7 @@ drawSkills(document.getElementById("s_emp"),"emp");
 renderTalents();
 
 </script>
-
-  <!-- ИНВЕНТАРЬ И СКЛАД -->
+<!-- ИНВЕНТАРЬ И СКЛАД -->
 
 <div class="grid" style="margin-top:22px">
 
@@ -478,7 +461,7 @@ renderTalents();
 const DEFAULT_INV = [
  {n:"Глефа", d:"Оружие. Двуручное. 2 прочности. 3 урона; ближняя; режущее; сбивающее; разоружающее; освященное."},
 
- {n:"Броня Смотрителей", d:"Доспех. 10 прочности. -1 от колющего урона."},
+ {n:"Броня Смотрителя", d:"Доспех. 10 прочности. -1 от колющего."},
 
  {n:"Набор инструментов", d:"Снаряжение. 3 прочности. Прибавка к проверкам ремесла равна прочности."},
 
@@ -488,6 +471,8 @@ const DEFAULT_INV = [
 
  {n:"Музыкальный проигрыватель", d:"Артефакт. Проигрывает и записывает музыку на неизвестном языке."},
 
+ {n:"Свистулька", d:"Артефакт. При трате манёвра и наличии свободной руки может дать специфический звук в виде птичьей трели. Слышен в пределах сверхдальней дистанции."},
+
  {n:"Изысканный костюм", d:"+2 к влиянию при взаимодействии с людьми. +1 к проворству и скрытности."},
 
  {n:"Бронзовая Маска Смотрителя Духов", d:"+2 куба против ментальных воздействий. Личность невозможно установить обычными проверками."}
@@ -496,7 +481,7 @@ const DEFAULT_INV = [
 const DEFAULT_STASH = [
  {n:"Компонент", d:"Предмет крафта. 3 штуки."},
 
- {n:"Ящик с деталями", d:"Хлам для разбора. Проверка ремесла сложность 2 → 1 компонент."}
+ {n:"Ящик с деталями", d:"Хлам для разбора, 0штук. Проверка ремесла сложность 2 → 1 компонент."}
 ];
 
 /* ===== СОСТОЯНИЕ ===== */
@@ -563,9 +548,6 @@ renderAllLists();
 
 /* ===== СОХРАНЕНИЕ ПОРТРЕТОВ ===== */
 
-const portrait = document.getElementById("portrait");
-const petPortrait = document.getElementById("petPortrait");
-
 portrait.onclick = async ()=>{
  const f = await pickFile();
  if(!f) return;
@@ -599,5 +581,3 @@ function pickFile(){
 
 </body>
 </html>
-
-</div>
