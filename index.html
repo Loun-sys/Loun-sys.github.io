@@ -2,24 +2,20 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Чарлист — Адольф Похуй</title>
+<title>Чарлист — Адольф Грау</title>
 <style>
 body{
   margin:0;
-  background:
-    radial-gradient(circle at 20% 10%, #1a1a1a, #000 60%),
-    #000;
+  background: radial-gradient(circle at 20% 10%, #1a1a1a, #000 70%), #000;
   color:#e8e8e8;
-  font-family: "Segoe UI", sans-serif;
+  font-family:"Segoe UI", sans-serif;
   letter-spacing:.3px;
 }
-
 .wrapper{
   max-width:1200px;
   margin:30px auto;
   padding:24px;
 }
-
 h1{
   margin:0 0 20px 0;
   font-weight:600;
@@ -28,29 +24,25 @@ h1{
   border-bottom:2px solid #333;
   padding-bottom:10px;
 }
-
 .grid{
   display:grid;
-  grid-template-columns: 420px 1fr;
+  grid-template-columns:420px 1fr;
   gap:22px;
 }
-
 /* Карточки */
 .card{
-  background: linear-gradient(#111,#0a0a0a);
+  background: linear-gradient(145deg,#111,#0a0a0a);
   border:1px solid #2b2b2b;
-  border-radius:10px;
+  border-radius:12px;
   padding:16px;
-  box-shadow:
-    inset 0 0 25px #000,
-    0 0 20px rgba(0,0,0,.7);
+  box-shadow: inset 0 0 20px #000, 0 0 15px rgba(0,0,0,.6);
   position:relative;
-  transition: transform .15s;
+  transition: transform .2s, box-shadow .2s;
 }
 .card:hover{
   transform: translateY(-2px);
+  box-shadow: inset 0 0 25px #000, 0 0 25px rgba(255,255,255,.1);
 }
-
 .label{
   font-size:12px;
   letter-spacing:2px;
@@ -60,56 +52,29 @@ h1{
   padding-bottom:4px;
   border-bottom:1px solid #222;
 }
-
 .namebox{
   font-size:22px;
   padding:12px;
   background:#050505;
   border:1px solid #2a2a2a;
-  border-radius:6px;
+  border-radius:8px;
   text-align:center;
-  box-shadow: inset 0 0 6px #000;
+  box-shadow: inset 0 0 8px #000;
 }
-
 /* Портрет */
-.portrait{
+.portrait, .pet-portrait{
   width:100%;
-  height:520px;
-  object-fit:contain;
-  background:#000;
   border:1px solid #333;
   border-radius:8px;
-  cursor:pointer;
-  transition:.2s;
-}
-.portrait:hover{
-  transform: scale(1.02);
-}
-
-/* Питомец */
-.pet-portrait{
-  width:100%;
-  height:240px;
-  object-fit:contain;
   background:#000;
-  border:1px solid #333;
-  border-radius:8px;
   cursor:pointer;
-  margin-bottom:10px;
+  object-fit:contain;
   transition:.2s;
 }
-.pet-portrait:hover{
-  transform: scale(1.02);
+.portrait:hover, .pet-portrait:hover{
+  transform:scale(1.02);
 }
-
-.pet-text{
-  font-size:13px;
-  line-height:1.45;
-  color:#cfcfcf;
-  white-space:pre-wrap;
-}
-
-/* Точки (dots) */
+/* Точки */
 .dots{
   display:flex;
   gap:6px;
@@ -120,30 +85,30 @@ h1{
   height:18px;
   border-radius:50%;
   border:1px solid #555;
+  background:#0a0a0a;
+  box-shadow: inset 0 -2px 3px #000;
   cursor:pointer;
   transition:.15s;
-  background:#0a0a0a;
+}
+.dot.on{
+  background:#e6e6e6;
+  box-shadow: 0 0 6px #fff inset;
 }
 .dot:hover{
   transform:scale(1.15);
   border-color:#aaa;
 }
-.dot.on{
-  background:#e6e6e6;
-  box-shadow:0 0 6px #fff;
-}
-
-/* Списки и элементы */
+/* Списки */
 .item{
   border:1px solid #242424;
-  padding:8px;
-  border-radius:6px;
+  padding:10px;
+  border-radius:8px;
   margin-bottom:8px;
-  background:#070707;
-  transition:.1s;
+  background: linear-gradient(145deg,#0c0c0c,#111);
+  transition:.15s;
 }
 .item:hover{
-  background:#0a0a0a;
+  background: linear-gradient(145deg,#1a1a1a,#222);
 }
 .item b{
   letter-spacing:1px;
@@ -151,14 +116,13 @@ h1{
 .item p{
   margin:4px 0 0 0;
   font-size:13px;
-  color:#bdbdbd;
+  color:#ccc;
 }
 .scroll{
   max-height:260px;
   overflow:auto;
   padding-right:6px;
 }
-
 /* Кнопки */
 .add-mini{
   position:absolute;
@@ -172,66 +136,54 @@ h1{
   height:22px;
   cursor:pointer;
 }
-.add-mini:hover{
-  color:#fff;
-  border-color:#777;
-}
+.add-mini:hover{ color:#fff; border-color:#777; }
 .xbtn{
   float:right;
   cursor:pointer;
   opacity:.35;
 }
-.xbtn:hover{
-  opacity:.9;
-}
+.xbtn:hover{ opacity:.9; }
 .movebtn{
   font-size:11px;
   opacity:.5;
   cursor:pointer;
+  margin-top:4px;
 }
-.movebtn:hover{
-  opacity:1;
-}
+.movebtn:hover{ opacity:1; }
 </style>
 </head>
 <body>
 <div class="wrapper">
-<h1>Чарлист — Адольф Похуй</h1>
-
+<h1>Чарлист — Адольф Грау</h1>
 <div class="grid">
 
 <!-- ЛЕВАЯ КОЛОНКА -->
 <div>
-<div class="card">
-  <div class="label">Имя</div>
-  <div class="namebox">Адольф Похуй</div>
-</div>
+  <div class="card">
+    <div class="label">Имя</div>
+    <div class="namebox">Адольф Грау</div>
+  </div>
 
-<div class="card">
-  <div class="label">Портрет</div>
-  <img id="portrait" class="portrait" src="https://i.pinimg.com/736x/31/31/be/3131be8cf94d75abe81a15f97e8c70dc.jpg">
-</div>
+  <div class="card">
+    <div class="label">Портрет</div>
+    <img id="portrait" class="portrait" style="height:520px;" src="https://i.pinimg.com/736x/31/31/be/3131be8cf94d75abe81a15f97e8c70dc.jpg">
+  </div>
 
-<div class="card">
-  <div class="label">Питомец — Ворон-Духолов</div>
-  <img id="petPortrait" class="pet-portrait" src="https://i.pinimg.com/736x/72/52/56/72525624d779831b98791d318e44d998.jpg">
-  <div class="pet-text">
+  <div class="card">
+    <div class="label">Питомец — Ворон-Духолов</div>
+    <img id="petPortrait" class="pet-portrait" style="height:240px;" src="https://i.pinimg.com/736x/72/52/56/72525624d779831b98791d318e44d998.jpg">
+    <div class="pet-text">
 ВОРОН-ДУХОЛОВ
 
 Мистическая тварь, выведенная и обученная Смотрителями Духов. Отличается костяными наростами вокруг глаз, позволяющими чувствовать возмущения Призрачного Поля.
 
 Связь с владельцем:
-Ворон неразлучен со своим Смотрителем, напоминая ему о его долге. Он пребывает в непосредственной близости с хозяином и в большинстве своём неприхотлив, но требует заботы и ласки.
-
-Воронье Чутьё:
-Если в пределах трёх смежных районов происходит неестественная или насильственная смерть, либо возникает разрыв в Призрачном Поле, существо немедленно устремится к эпицентру события. Время в пути: 1-а минута или 1-н ход.
-
-Фиксация: Достигнув цели, Ворон фиксирует событие, затем возвращается к хозяину. Бонус наблюдательности: +3 к проверкам Наблюдательности.
+Ворон неразлучен со своим Смотрителем, напоминая ему о его долге. Он пребывает в непосредственной близости с хозяином и требует заботы и ласки.
+    </div>
   </div>
 </div>
-</div>
 
-  <!-- ПРАВАЯ КОЛОНКА -->
+<!-- ПРАВАЯ КОЛОНКА -->
 <div>
   <!-- ХАРАКТЕРИСТИКИ -->
   <div class="card">
@@ -285,10 +237,9 @@ h1{
 </div> <!-- конец grid -->
 
 <script>
-// ===== СОСТОЯНИЕ =====
+// ===== СОСТОЯНИЕ И ЗНАЧЕНИЯ ПО УМОЛЧАНИЮ =====
 const STATE = JSON.parse(localStorage.getItem("sheet")||"{}");
 
-// Значения по умолчанию
 const DEFAULT = {
   body:4,
   agl:2,
@@ -310,29 +261,33 @@ const DEFAULT = {
   ]
 };
 
+// Если в localStorage пусто — инициализируем
+STATE.body ??= DEFAULT.body;
+STATE.agl ??= DEFAULT.agl;
+STATE.mind ??= DEFAULT.mind;
+STATE.emp ??= DEFAULT.emp;
+STATE.skills ||= JSON.parse(JSON.stringify(DEFAULT.skills));
+STATE.talents ||= JSON.parse(JSON.stringify(DEFAULT.talents));
+
 function save(){ localStorage.setItem("sheet", JSON.stringify(STATE)); }
 
-// ===== ТОЧКИ =====
+// ===== РИСОВАНИЕ ТОЧЕК =====
 function drawDots(el, key, max){
-  let val = STATE[key] ?? DEFAULT[key];
+  const val = STATE[key] ?? DEFAULT[key];
   el.innerHTML="";
   for(let i=1;i<=max;i++){
     const d=document.createElement("div");
     d.className="dot"+(i<=val?" on":"");
     d.onclick=()=>{
-      STATE[key]=i;
-      save();
-      drawDots(el,key,max);
+      STATE[key]=i; save(); drawDots(el,key,max);
     };
     el.appendChild(d);
   }
 }
 
-// ===== НАВЫКИ =====
+// ===== РИСОВАНИЕ НАВЫКОВ =====
 function drawSkills(root, group){
-  const data = {...DEFAULT.skills[group], ...(STATE.skills?.[group]||{})};
-  STATE.skills ||= {};
-  STATE.skills[group] ||= {};
+  const data = {...DEFAULT.skills[group], ...STATE.skills[group]};
   root.innerHTML="";
   Object.entries(data).forEach(([name,val])=>{
     const row=document.createElement("div");
@@ -344,8 +299,7 @@ function drawSkills(root, group){
       d.className="dot"+(i<=val?" on":"");
       d.onclick=()=>{
         STATE.skills[group][name]=i;
-        save();
-        drawSkills(root,group);
+        save(); drawSkills(root,group);
       };
       box.appendChild(d);
     }
@@ -354,12 +308,11 @@ function drawSkills(root, group){
   });
 }
 
-// ===== ТАЛАНТЫ =====
+// ===== РЕНДЕР ТАЛАНТОВ =====
 function renderTalents(){
   const wrap = document.getElementById("talents");
-  const arr = STATE.talents || DEFAULT.talents;
   wrap.innerHTML="";
-  arr.forEach((t,i)=>{
+  STATE.talents.forEach((t,i)=>{
     const div=document.createElement("div");
     div.className="item";
     div.innerHTML = `<span class="xbtn" onclick="delTalent(${i})">✕</span><b>${t.n}</b><p>${t.d}</p>`;
@@ -369,15 +322,11 @@ function renderTalents(){
 function addTalent(){
   const n=prompt("Название таланта:"); if(!n) return;
   const d=prompt("Описание:"); 
-  STATE.talents ||= [];
   STATE.talents.push({n,d});
-  save();
-  renderTalents();
+  save(); renderTalents();
 }
 function delTalent(i){
-  STATE.talents.splice(i,1);
-  save();
-  renderTalents();
+  STATE.talents.splice(i,1); save(); renderTalents();
 }
 
 // ===== ИНИЦИАЛИЗАЦИЯ =====
@@ -390,7 +339,7 @@ drawSkills(document.getElementById("s_mind"),"mind");
 drawSkills(document.getElementById("s_emp"),"emp");
 renderTalents();
 
-  <!-- ИНВЕНТАРЬ И СКЛАД -->
+<!-- ИНВЕНТАРЬ И СКЛАД -->
 <div class="grid" style="margin-top:22px">
 
   <div class="card">
@@ -420,15 +369,14 @@ const DEFAULT_INV = [
   {n:"Изысканный костюм", d:"+2 к влиянию, +1 к проворству и скрытности."},
   {n:"Бронзовая Маска Смотрителя Духов", d:"+2 куба против ментальных воздействий. Личность невозможно установить обычными проверками."}
 ];
-
 const DEFAULT_STASH = [
   {n:"Компонент", d:"Предмет крафта. 3 штуки."},
   {n:"Ящик с деталями", d:"Хлам для разбора. Проверка ремесла сложность 2 → 1 компонент."}
 ];
 
 // ===== СОСТОЯНИЕ =====
-STATE.inv ||= DEFAULT_INV.slice();
-STATE.stash ||= DEFAULT_STASH.slice();
+STATE.inv ||= JSON.parse(JSON.stringify(DEFAULT_INV));
+STATE.stash ||= JSON.parse(JSON.stringify(DEFAULT_STASH));
 
 // ===== РЕНДЕР СПИСКОВ =====
 function renderList(key, id){
@@ -460,9 +408,7 @@ function addItem(key){
   renderAllLists();
 }
 function delItem(key,i){
-  STATE[key].splice(i,1);
-  save();
-  renderAllLists();
+  STATE[key].splice(i,1); save(); renderAllLists();
 }
 function moveItem(from,i){
   const to = from==="inv" ? "stash" : "inv";
@@ -512,6 +458,5 @@ function pickFile(){
   });
 }
 </script>
-
 </body>
 </html>
