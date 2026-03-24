@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Чарлист — Адольф Грау</title>
-
 <style>
 body{
   margin:0;
@@ -11,7 +10,7 @@ body{
     radial-gradient(circle at 20% 10%, #1a1a1a, #000 60%),
     #000;
   color:#e8e8e8;
-  font-family: "Segoe UI", serif;
+  font-family: "Segoe UI", sans-serif;
   letter-spacing:.3px;
 }
 
@@ -36,16 +35,20 @@ h1{
   gap:22px;
 }
 
+/* Карточки */
 .card{
-  background:
-    linear-gradient(#111,#0a0a0a);
+  background: linear-gradient(#111,#0a0a0a);
   border:1px solid #2b2b2b;
   border-radius:10px;
-  padding:14px;
+  padding:16px;
   box-shadow:
     inset 0 0 25px #000,
-    0 0 18px rgba(0,0,0,.7);
+    0 0 20px rgba(0,0,0,.7);
   position:relative;
+  transition: transform .15s;
+}
+.card:hover{
+  transform: translateY(-2px);
 }
 
 .label{
@@ -60,15 +63,15 @@ h1{
 
 .namebox{
   font-size:22px;
-  padding:10px;
+  padding:12px;
   background:#050505;
   border:1px solid #2a2a2a;
   border-radius:6px;
   text-align:center;
+  box-shadow: inset 0 0 6px #000;
 }
 
-/* портрет */
-
+/* Портрет */
 .portrait{
   width:100%;
   height:520px;
@@ -77,10 +80,13 @@ h1{
   border:1px solid #333;
   border-radius:8px;
   cursor:pointer;
+  transition:.2s;
+}
+.portrait:hover{
+  transform: scale(1.02);
 }
 
-/* питомец */
-
+/* Питомец */
 .pet-portrait{
   width:100%;
   height:240px;
@@ -90,6 +96,10 @@ h1{
   border-radius:8px;
   cursor:pointer;
   margin-bottom:10px;
+  transition:.2s;
+}
+.pet-portrait:hover{
+  transform: scale(1.02);
 }
 
 .pet-text{
@@ -99,14 +109,12 @@ h1{
   white-space:pre-wrap;
 }
 
-/* точки */
-
+/* Точки (dots) */
 .dots{
   display:flex;
   gap:6px;
   margin-bottom:10px;
 }
-
 .dot{
   width:18px;
   height:18px;
@@ -116,45 +124,42 @@ h1{
   transition:.15s;
   background:#0a0a0a;
 }
-
 .dot:hover{
   transform:scale(1.15);
   border-color:#aaa;
 }
-
 .dot.on{
   background:#e6e6e6;
   box-shadow:0 0 6px #fff;
 }
 
-/* списки */
-
+/* Списки и элементы */
 .item{
   border:1px solid #242424;
   padding:8px;
   border-radius:6px;
   margin-bottom:8px;
   background:#070707;
+  transition:.1s;
 }
-
+.item:hover{
+  background:#0a0a0a;
+}
 .item b{
   letter-spacing:1px;
 }
-
 .item p{
   margin:4px 0 0 0;
   font-size:13px;
   color:#bdbdbd;
 }
-
 .scroll{
   max-height:260px;
   overflow:auto;
   padding-right:6px;
 }
 
-/* кнопки */
-
+/* Кнопки */
 .add-mini{
   position:absolute;
   top:8px;
@@ -167,45 +172,36 @@ h1{
   height:22px;
   cursor:pointer;
 }
-
 .add-mini:hover{
   color:#fff;
   border-color:#777;
 }
-
 .xbtn{
   float:right;
   cursor:pointer;
   opacity:.35;
 }
-
 .xbtn:hover{
   opacity:.9;
 }
-
 .movebtn{
   font-size:11px;
   opacity:.5;
   cursor:pointer;
 }
-
 .movebtn:hover{
   opacity:1;
 }
 </style>
 </head>
-
 <body>
 <div class="wrapper">
-
 <h1>Чарлист — Адольф Грау</h1>
 
 <div class="grid">
 
 <!-- ЛЕВАЯ КОЛОНКА -->
-
 <div>
-
 <div class="card">
   <div class="label">Имя</div>
   <div class="namebox">Адольф Грау</div>
@@ -213,370 +209,308 @@ h1{
 
 <div class="card">
   <div class="label">Портрет</div>
-  <img id="portrait"
-  class="portrait"
-  src="https://i.pinimg.com/736x/31/31/be/3131be8cf94d75abe81a15f97e8c70dc.jpg">
+  <img id="portrait" class="portrait" src="https://i.pinimg.com/736x/31/31/be/3131be8cf94d75abe81a15f97e8c70dc.jpg">
 </div>
 
 <div class="card">
   <div class="label">Питомец — Ворон-Духолов</div>
-
-  <img id="petPortrait"
-  class="pet-portrait"
-  src="https://i.pinimg.com/736x/72/52/56/72525624d779831b98791d318e44d998.jpg">
-
+  <img id="petPortrait" class="pet-portrait" src="https://i.pinimg.com/736x/72/52/56/72525624d779831b98791d318e44d998.jpg">
   <div class="pet-text">
 ВОРОН-ДУХОЛОВ
 
 Мистическая тварь, выведенная и обученная Смотрителями Духов. Отличается костяными наростами вокруг глаз, позволяющими чувствовать возмущения Призрачного Поля.
 
 Связь с владельцем:
-Ворон неразлучен со своим Смотрителем, напоминая ему о его долге. Он пребывает в непосредственной близости с хозяином и в большинстве своём неприхотлив, но, как и любое животное, требует заботы и ласки.
+Ворон неразлучен со своим Смотрителем, напоминая ему о его долге. Он пребывает в непосредственной близости с хозяином и в большинстве своём неприхотлив, но требует заботы и ласки.
 
 Воронье Чутьё:
-Если в пределах трёх смежных районов от текущего местоположения Ворона происходит неестественная или насильственная смерть, либо возникает масштабный разрыв в Призрачном Поле, существо немедленно сорвётся с места и устремится к эпицентру события. Время в пути: 1-а минута или 1-н ход (на усмотрение ГМа, ведущего слух/ситуацию, в зависимости от расстояния и препятствий).
+Если в пределах трёх смежных районов происходит неестественная или насильственная смерть, либо возникает разрыв в Призрачном Поле, существо немедленно устремится к эпицентру события. Время в пути: 1-а минута или 1-н ход.
 
-Фиксация: Достигнув цели, Ворон в течение 1-го хода фиксирует событие, после чего столь же быстро возвращается к хозяину. Бонус наблюдательности: На пути к цели Смотритель получает +3 к проверкам Наблюдательности (для обнаружения ловушек, оптимальных маршрутов, скрытых подходов или аномалий, отмеченных Вороном).
-
-
-Долг:
-Если событие не устранено — мешает хозяину и накладывает помехи. Ворон начинает отвлекать хозяина: каркать, рвать плащ, бить крыльями, налагая помеху на все броски Смотрителя, лишая его манёвра, а то и действия в особо патовых ситуациях, и привлекая внимание. Ворон отказывается помогать до тех пор, пока угроза не будет устранена.
-
-
+Фиксация: Достигнув цели, Ворон фиксирует событие, затем возвращается к хозяину. Бонус наблюдательности: +3 к проверкам Наблюдательности.
   </div>
 </div>
-
 </div>
-<!-- ПРАВАЯ КОЛОНКА -->
+
+  <!-- ПРАВАЯ КОЛОНКА -->
 <div>
+  <!-- ХАРАКТЕРИСТИКИ -->
+  <div class="card">
+    <div class="label">Телосложение</div>
+    <div class="dots" data-key="body" data-max="5"></div>
+  </div>
 
-<!-- ХАРАКТЕРИСТИКИ -->
+  <div class="card">
+    <div class="label">Ловкость</div>
+    <div class="dots" data-key="agl" data-max="5"></div>
+  </div>
 
-<div class="card">
-  <div class="label">Телосложение</div>
-  <div class="dots" data-key="body" data-max="5"></div>
-</div>
+  <div class="card">
+    <div class="label">Смекалка</div>
+    <div class="dots" data-key="mind" data-max="5"></div>
+  </div>
 
-<div class="card">
-  <div class="label">Ловкость</div>
-  <div class="dots" data-key="agl" data-max="5"></div>
-</div>
+  <div class="card">
+    <div class="label">Эмпатия</div>
+    <div class="dots" data-key="emp" data-max="5"></div>
+  </div>
 
-<div class="card">
-  <div class="label">Смекалка</div>
-  <div class="dots" data-key="mind" data-max="5"></div>
-</div>
+  <!-- НАВЫКИ -->
+  <div class="card">
+    <div class="label">Телосложение — навыки</div>
+    <div id="s_body"></div>
+  </div>
 
-<div class="card">
-  <div class="label">Эмпатия</div>
-  <div class="dots" data-key="emp" data-max="5"></div>
-</div>
+  <div class="card">
+    <div class="label">Ловкость — навыки</div>
+    <div id="s_agl"></div>
+  </div>
 
+  <div class="card">
+    <div class="label">Смекалка — навыки</div>
+    <div id="s_mind"></div>
+  </div>
 
-<!-- НАВЫКИ -->
+  <div class="card">
+    <div class="label">Эмпатия — навыки</div>
+    <div id="s_emp"></div>
+  </div>
 
-<div class="card">
-  <div class="label">Телосложение — навыки</div>
-  <div id="s_body"></div>
-</div>
-
-<div class="card">
-  <div class="label">Ловкость — навыки</div>
-  <div id="s_agl"></div>
-</div>
-
-<div class="card">
-  <div class="label">Смекалка — навыки</div>
-  <div id="s_mind"></div>
-</div>
-
-<div class="card">
-  <div class="label">Эмпатия — навыки</div>
-  <div id="s_emp"></div>
-</div>
-
-
-<!-- ТАЛАНТЫ -->
-
-<div class="card">
-  <div class="label">Таланты</div>
-  <div id="talents" class="scroll"></div>
-  <button class="add-mini" onclick="addTalent()">＋</button>
-</div>
-
+  <!-- ТАЛАНТЫ -->
+  <div class="card">
+    <div class="label">Таланты</div>
+    <div id="talents" class="scroll"></div>
+    <button class="add-mini" onclick="addTalent()">＋</button>
+  </div>
 </div> <!-- конец правой колонки -->
 </div> <!-- конец grid -->
 
 <script>
-
-/* ====== СОСТОЯНИЕ ====== */
-
+// ===== СОСТОЯНИЕ =====
 const STATE = JSON.parse(localStorage.getItem("sheet")||"{}");
 
-/* значения по умолчанию */
-
+// Значения по умолчанию
 const DEFAULT = {
- body:4,
- agl:2,
- mind:5,
- emp:3,
-
- skills:{
-  body:{Сила:0,Выносливость:0,Драка:5},
-  agl:{Проворство:0,Скрытность:0,Стрельба:0},
-  mind:{Анализ:1,Знания:0,Наблюдательность:5,Ремесло:5},
-  emp:{Влияние:0,Лечение:0,Проницательность:0}
- },
-
- talents:[
-  {n:"Изобретатель", d:"При первом усовершенствовании предмета не тратится компонент."},
-  {n:"Ритуалистика", d:'Доступен ритуал: <a href="https://docs.google.com/document/d/1TjCmSpLfW43ABwKMRuDI0SVO7V-yb8NkzwuFxlVsFq4/edit?usp=sharing" target="_blank">Займ у будущего</a>'},
-  {n:"Девять Жизней", d:"Можно перекинуть кубы при травме."},
-  {n:"Упорный", d:"Можно пойти на Риск дважды."},
-  {n:"Чугунный Козырь", d:"Дополнительная механическая рука."}  
-  {n:"Неуловимый", d:"Защита от маневра."},
- ]
+  body:4,
+  agl:2,
+  mind:5,
+  emp:3,
+  skills:{
+    body:{Сила:0,Выносливость:0,Драка:5},
+    agl:{Проворство:0,Скрытность:0,Стрельба:0},
+    mind:{Анализ:1,Знания:0,Наблюдательность:5,Ремесло:5},
+    emp:{Влияние:0,Лечение:0,Проницательность:0}
+  },
+  talents:[
+    {n:"Изобретатель", d:"При первом усовершенствовании предмета не тратится компонент."},
+    {n:"Ритуалистика", d:'Доступен ритуал: <a href="https://docs.google.com/document/d/1TjCmSpLfW43ABwKMRuDI0SVO7V-yb8NkzwuFxlVsFq4/edit?usp=sharing" target="_blank">Займ у будущего</a>'},
+    {n:"Девять Жизней", d:"Можно перекинуть кубы при травме."},
+    {n:"Упорный", d:"Можно пойти на Риск дважды."},
+    {n:"Чугунный Козырь", d:"Дополнительная механическая рука."},
+    {n:"Неуловимый", d:"Защита от маневра."}
+  ]
 };
 
-function save(){
- localStorage.setItem("sheet", JSON.stringify(STATE));
-}
+function save(){ localStorage.setItem("sheet", JSON.stringify(STATE)); }
 
-/* ====== ТОЧКИ ====== */
-
+// ===== ТОЧКИ =====
 function drawDots(el, key, max){
- let val = STATE[key] ?? DEFAULT[key];
- el.innerHTML="";
- for(let i=1;i<=max;i++){
-  const d=document.createElement("div");
-  d.className="dot"+(i<=val?" on":"");
-  d.onclick=()=>{
-    STATE[key]=i;
-    save();
-    drawDots(el,key,max);
-  };
-  el.appendChild(d);
- }
-}
-
-/* ===== НАВЫКИ ===== */
-
-function drawSkills(root, group){
- const data = {...DEFAULT.skills[group], ...(STATE.skills?.[group]||{})};
- STATE.skills ||= {};
- STATE.skills[group] ||= {};
-
- root.innerHTML="";
-
- Object.entries(data).forEach(([name,val])=>{
-  const row=document.createElement("div");
-  row.innerHTML = `<div class="label" style="border:none;margin:6px 0 2px">${name}</div>`;
-  const box=document.createElement("div");
-  box.className="dots";
-
-  for(let i=1;i<=5;i++){
+  let val = STATE[key] ?? DEFAULT[key];
+  el.innerHTML="";
+  for(let i=1;i<=max;i++){
     const d=document.createElement("div");
     d.className="dot"+(i<=val?" on":"");
     d.onclick=()=>{
-      STATE.skills[group][name]=i;
+      STATE[key]=i;
       save();
-      drawSkills(root,group);
+      drawDots(el,key,max);
     };
-    box.appendChild(d);
+    el.appendChild(d);
   }
-
-  row.appendChild(box);
-  root.appendChild(row);
- });
 }
 
-/* ===== ТАЛАНТЫ ===== */
+// ===== НАВЫКИ =====
+function drawSkills(root, group){
+  const data = {...DEFAULT.skills[group], ...(STATE.skills?.[group]||{})};
+  STATE.skills ||= {};
+  STATE.skills[group] ||= {};
+  root.innerHTML="";
+  Object.entries(data).forEach(([name,val])=>{
+    const row=document.createElement("div");
+    row.innerHTML = `<div class="label" style="border:none;margin:6px 0 2px">${name}</div>`;
+    const box=document.createElement("div");
+    box.className="dots";
+    for(let i=1;i<=5;i++){
+      const d=document.createElement("div");
+      d.className="dot"+(i<=val?" on":"");
+      d.onclick=()=>{
+        STATE.skills[group][name]=i;
+        save();
+        drawSkills(root,group);
+      };
+      box.appendChild(d);
+    }
+    row.appendChild(box);
+    root.appendChild(row);
+  });
+}
 
+// ===== ТАЛАНТЫ =====
 function renderTalents(){
- const wrap = document.getElementById("talents");
- const arr = STATE.talents || DEFAULT.talents;
- wrap.innerHTML="";
-
- arr.forEach((t,i)=>{
-  const div=document.createElement("div");
-  div.className="item";
-  div.innerHTML = `<span class="xbtn" onclick="delTalent(${i})">✕</span><b>${t.n}</b><p>${t.d}</p>`;
-  wrap.appendChild(div);
- });
+  const wrap = document.getElementById("talents");
+  const arr = STATE.talents || DEFAULT.talents;
+  wrap.innerHTML="";
+  arr.forEach((t,i)=>{
+    const div=document.createElement("div");
+    div.className="item";
+    div.innerHTML = `<span class="xbtn" onclick="delTalent(${i})">✕</span><b>${t.n}</b><p>${t.d}</p>`;
+    wrap.appendChild(div);
+  });
 }
-
 function addTalent(){
- const n=prompt("Название таланта:");
- if(!n) return;
- const d=prompt("Описание:");
- STATE.talents ||= [];
- STATE.talents.push({n,d});
- save();
- renderTalents();
+  const n=prompt("Название таланта:"); if(!n) return;
+  const d=prompt("Описание:"); 
+  STATE.talents ||= [];
+  STATE.talents.push({n,d});
+  save();
+  renderTalents();
 }
-
 function delTalent(i){
- STATE.talents.splice(i,1);
- save();
- renderTalents();
+  STATE.talents.splice(i,1);
+  save();
+  renderTalents();
 }
 
-/* ===== ИНИЦИАЛИЗАЦИЯ ===== */
-
+// ===== ИНИЦИАЛИЗАЦИЯ =====
 document.querySelectorAll(".dots[data-key]").forEach(el=>{
- drawDots(el, el.dataset.key, +el.dataset.max);
+  drawDots(el, el.dataset.key, +el.dataset.max);
 });
-
 drawSkills(document.getElementById("s_body"),"body");
 drawSkills(document.getElementById("s_agl"),"agl");
 drawSkills(document.getElementById("s_mind"),"mind");
 drawSkills(document.getElementById("s_emp"),"emp");
-
 renderTalents();
 
-</script>
-<!-- ИНВЕНТАРЬ И СКЛАД -->
-
+  <!-- ИНВЕНТАРЬ И СКЛАД -->
 <div class="grid" style="margin-top:22px">
 
-<div class="card">
-  <div class="label">Инвентарь</div>
-  <div id="inv" class="scroll"></div>
-  <button class="add-mini" onclick="addItem('inv')">＋</button>
-</div>
+  <div class="card">
+    <div class="label">Инвентарь</div>
+    <div id="inv" class="scroll"></div>
+    <button class="add-mini" onclick="addItem('inv')">＋</button>
+  </div>
 
-<div class="card">
-  <div class="label">Склад</div>
-  <div id="stash" class="scroll"></div>
-  <button class="add-mini" onclick="addItem('stash')">＋</button>
-</div>
+  <div class="card">
+    <div class="label">Склад</div>
+    <div id="stash" class="scroll"></div>
+    <button class="add-mini" onclick="addItem('stash')">＋</button>
+  </div>
 
 </div>
-
 
 <script>
-
-/* ===== ПРЕДМЕТЫ ПО УМОЛЧАНИЮ ===== */
-
+// ===== ПРЕДМЕТЫ ПО УМОЛЧАНИЮ =====
 const DEFAULT_INV = [
- {n:"Глефа", d:"Оружие. Двуручное. 2 прочности. 3 урона; ближняя; режущее; сбивающее; разоружающее; освященное."},
-
- {n:"Броня Смотрителя", d:"Доспех. 10 прочности. -1 от колющего."},
-
- {n:"Набор инструментов", d:"Снаряжение. 3 прочности. Прибавка к проверкам ремесла равна прочности."},
-
- {n:"Фонарь", d:"Снаряжение. ...А я думал, что вы заставите повесить мне на хуй электрический фонарь и работать в три смены."},
-
- {n:"Павеза", d:"Щит. Одноручное. 4 прочности. +1 сложность ловкости пока в руках; блок 2 дробящего за 1 прочности."},
-
- {n:"Музыкальный проигрыватель", d:"Артефакт. Проигрывает и записывает музыку на неизвестном языке."},
-
- {n:"Свистулька", d:"Артефакт. При трате манёвра и наличии свободной руки может дать специфический звук в виде птичьей трели. Слышен в пределах сверхдальней дистанции."},
-
- {n:"Изысканный костюм", d:"+2 к влиянию при взаимодействии с людьми. +1 к проворству и скрытности."},
-
- {n:"Бронзовая Маска Смотрителя Духов", d:"+2 куба против ментальных воздействий. Личность невозможно установить обычными проверками."}
+  {n:"Глефа", d:"Оружие. Двуручное. 2 прочности. 3 урона; ближняя; режущее; сбивающее; разоружающее; освященное."},
+  {n:"Броня Смотрителя", d:"Доспех. 10 прочности. -1 от колющего."},
+  {n:"Набор инструментов", d:"Снаряжение. 3 прочности. + к проверкам ремесла = прочность."},
+  {n:"Фонарь", d:"Снаряжение. Используется для освещения."},
+  {n:"Павеза", d:"Щит. Одноручное. 4 прочности. +1 к сложности ловкости в руках; блок 2 дробящего за 1 прочности."},
+  {n:"Музыкальный проигрыватель", d:"Артефакт. Проигрывает и записывает музыку на неизвестном языке."},
+  {n:"Свистулька", d:"При трате манёвра и наличии свободной руки издает звук в виде птичьей трели."},
+  {n:"Изысканный костюм", d:"+2 к влиянию, +1 к проворству и скрытности."},
+  {n:"Бронзовая Маска Смотрителя Духов", d:"+2 куба против ментальных воздействий. Личность невозможно установить обычными проверками."}
 ];
 
 const DEFAULT_STASH = [
- {n:"Компонент", d:"Предмет крафта. 3 штуки."},
-
- {n:"Ящик с деталями", d:"Хлам для разбора, 0штук. Проверка ремесла сложность 2 → 1 компонент."}
+  {n:"Компонент", d:"Предмет крафта. 3 штуки."},
+  {n:"Ящик с деталями", d:"Хлам для разбора. Проверка ремесла сложность 2 → 1 компонент."}
 ];
 
-/* ===== СОСТОЯНИЕ ===== */
-
+// ===== СОСТОЯНИЕ =====
 STATE.inv ||= DEFAULT_INV.slice();
 STATE.stash ||= DEFAULT_STASH.slice();
 
-/* ===== РЕНДЕР ===== */
-
+// ===== РЕНДЕР СПИСКОВ =====
 function renderList(key, id){
- const wrap = document.getElementById(id);
- wrap.innerHTML="";
+  const wrap = document.getElementById(id);
+  wrap.innerHTML="";
+  STATE[key].forEach((it,i)=>{
+    const div=document.createElement("div");
+    div.className="item";
 
- STATE[key].forEach((it,i)=>{
-  const div=document.createElement("div");
-  div.className="item";
+    const moveTo = key==="inv" ? "stash" : "inv";
+    const arrow = key==="inv" ? "⇢ склад" : "⇠ инв.";
 
-  const moveTo = key==="inv" ? "stash" : "inv";
-  const arrow = key==="inv" ? "⇢ склад" : "⇠ инв.";
+    div.innerHTML =
+      `<span class="xbtn" onclick="delItem('${key}',${i})">✕</span>
+       <b>${it.n}</b>
+       <p>${it.d||""}</p>
+       <div class="movebtn" onclick="moveItem('${key}',${i})">${arrow}</div>`;
 
-  div.innerHTML =
-   `<span class="xbtn" onclick="delItem('${key}',${i})">✕</span>
-    <b>${it.n}</b>
-    <p>${it.d||""}</p>
-    <div class="movebtn" onclick="moveItem('${key}',${i})">${arrow}</div>`;
-
-  wrap.appendChild(div);
- });
+    wrap.appendChild(div);
+  });
 }
 
-/* ===== ОПЕРАЦИИ ===== */
-
+// ===== ОПЕРАЦИИ С ПРЕДМЕТАМИ =====
 function addItem(key){
- const n = prompt("Название предмета:");
- if(!n) return;
- const d = prompt("Описание:");
- STATE[key].push({n,d});
- save();
- renderAllLists();
+  const n = prompt("Название предмета:"); if(!n) return;
+  const d = prompt("Описание:");
+  STATE[key].push({n,d});
+  save();
+  renderAllLists();
 }
-
 function delItem(key,i){
- STATE[key].splice(i,1);
- save();
- renderAllLists();
+  STATE[key].splice(i,1);
+  save();
+  renderAllLists();
 }
-
 function moveItem(from,i){
- const to = from==="inv" ? "stash" : "inv";
- const it = STATE[from].splice(i,1)[0];
- STATE[to].push(it);
- save();
- renderAllLists();
+  const to = from==="inv" ? "stash" : "inv";
+  const it = STATE[from].splice(i,1)[0];
+  STATE[to].push(it);
+  save();
+  renderAllLists();
 }
-
 function renderAllLists(){
- renderList("inv","inv");
- renderList("stash","stash");
+  renderList("inv","inv");
+  renderList("stash","stash");
 }
 
-/* ===== ПЕРВЫЙ РЕНДЕР ===== */
-
+// ===== ПЕРВЫЙ РЕНДЕР =====
 renderAllLists();
 
-/* ===== СОХРАНЕНИЕ ПОРТРЕТОВ ===== */
+// ===== СОХРАНЕНИЕ ПОРТРЕТОВ =====
+const portrait = document.getElementById("portrait");
+const petPortrait = document.getElementById("petPortrait");
 
 portrait.onclick = async ()=>{
- const f = await pickFile();
- if(!f) return;
- const r = new FileReader();
- r.onload = ()=>{ portrait.src=r.result; STATE.portrait=r.result; save(); };
- r.readAsDataURL(f);
+  const f = await pickFile();
+  if(!f) return;
+  const r = new FileReader();
+  r.onload = ()=>{ portrait.src=r.result; STATE.portrait=r.result; save(); };
+  r.readAsDataURL(f);
 };
 
 petPortrait.onclick = async ()=>{
- const f = await pickFile();
- if(!f) return;
- const r = new FileReader();
- r.onload = ()=>{ petPortrait.src=r.result; STATE.pet=r.result; save(); };
- r.readAsDataURL(f);
+  const f = await pickFile();
+  if(!f) return;
+  const r = new FileReader();
+  r.onload = ()=>{ petPortrait.src=r.result; STATE.pet=r.result; save(); };
+  r.readAsDataURL(f);
 };
 
 if(STATE.portrait) portrait.src = STATE.portrait;
 if(STATE.pet) petPortrait.src = STATE.pet;
 
 function pickFile(){
- return new Promise(res=>{
-  const i=document.createElement("input");
-  i.type="file";
-  i.accept="image/*";
-  i.onchange=()=>res(i.files[0]);
-  i.click();
- });
+  return new Promise(res=>{
+    const i=document.createElement("input");
+    i.type="file";
+    i.accept="image/*";
+    i.onchange=()=>res(i.files[0]);
+    i.click();
+  });
 }
-
 </script>
 
 </body>
